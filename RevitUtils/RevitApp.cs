@@ -61,7 +61,6 @@ namespace PT_REVIT
             }
         }
 
-
         public static List<T> ActiveViewFilteredElementCollector<T>(BuiltInCategory category) where T : Element
         {
             return new FilteredElementCollector(Doc,Doc.ActiveView.Id).OfClass(typeof(T)).OfCategory(category).Cast<T>().ToList();
