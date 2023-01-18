@@ -11,7 +11,7 @@ namespace PT_REVIT
 {
     public static class RevitApp
     {
-        private static void Init(UIApplication uiApp)
+        public static void Init(UIApplication uiApp)
         {
             _uiApp = uiApp;
         }
