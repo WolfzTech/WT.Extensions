@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Autodesk.Revit.DB
 {
-    public static class XYZExtension
+    public static class XYZExtensions
     {
         public static string Result = string.Empty;
         

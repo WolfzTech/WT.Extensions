@@ -44,6 +44,8 @@ namespace PT_REVIT
 
         public static Selection Selection => UiDoc.Selection;
 
+        public static View ActiveView => Doc.ActiveView;
+
         public static List<T> FilteredElementCollector<T>(BuiltInCategory category) where T : Element
         {
             return new FilteredElementCollector(Doc).OfClass(typeof(T)).OfCategory(category).Cast<T>().ToList();

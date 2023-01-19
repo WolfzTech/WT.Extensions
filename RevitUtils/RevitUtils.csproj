@@ -89,12 +89,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\CurveExtensions.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\DoubleExtensions.cs" />
     <Compile Include="Extensions\ElementExtensions.cs" />
     <Compile Include="Extensions\ElementIdExtensions.cs" />
+    <Compile Include="Extensions\ElementTypeExtensions.cs" />
     <Compile Include="Extensions\Extension.cs" />
-    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Extensions\IEnumratorExtensions.cs" />
+    <Compile Include="Extensions\LineExtensions.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="Extensions\RebarExtensions.cs" />
+    <Compile Include="Extensions\ReferenceExtensions.cs" />
+    <Compile Include="Extensions\SelectionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\TaskDialogExtensions.cs" />
+    <Compile Include="Extensions\ViewExtensions.cs" />
+    <Compile Include="Extensions\ViewScheduleExtensions.cs" />
     <Compile Include="Extensions\XYZExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RevitApp.cs" />
