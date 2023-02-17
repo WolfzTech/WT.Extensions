@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RevitUtils</RootNamespace>
     <AssemblyName>RevitUtils</AssemblyName>
-    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -90,7 +91,7 @@
   <ItemGroup>
     <Compile Include="Extensions\CurveExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
-    <Compile Include="Extensions\DoubleExtensions.cs" />
+    <Compile Include="Extensions\UnitExtensions.cs" />
     <Compile Include="Extensions\ElementExtensions.cs" />
     <Compile Include="Extensions\ElementIdExtensions.cs" />
     <Compile Include="Extensions\ElementTypeExtensions.cs" />

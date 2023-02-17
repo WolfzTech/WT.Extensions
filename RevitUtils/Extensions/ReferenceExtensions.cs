@@ -1,33 +1,54 @@
-﻿using System.Collections.Generic;
+﻿using PT_REVIT;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Autodesk.Revit.DB
 {
     public static class ReferenceExtensions
     {
-        public static List<Element> GetLinkedElements(this IList<Reference> references)
+        public static List<Element> LinkedElements(this IList<Reference> references)
         {
-            var linkedElements = new List<Element>();
-            foreach (Reference reference in references)
+            return references.Select(x => x.LinkedElement()).ToList();
+        }
+
+        public static Element LinkedElement(this Reference reference, out Transform transform)
+        {
+            var revitLinkInstance = reference.Element<RevitLinkInstance>();
+            transform = revitLinkInstance.GetTransform();
+            var linkedDoc = revitLinkInstance.GetLinkDocument();
+            return reference.LinkedElementId.Element(linkedDoc);
+        }
+
+        public static Element LinkedElement(this Reference reference)
+        {
+            return reference.LinkedElement(out Transform _);
+        }
+
+        public static Element Element(this Reference reference, Document doc = null)
+        {
+            if (doc != null)
             {
-                RevitLinkInstance rlin = reference.ElementId.Element<RevitLinkInstance>();
-                var linkedDoc = rlin.GetLinkDocument();
-                Element linkedElement = reference.LinkedElementId.Element(linkedDoc);
-                linkedElements.Add(linkedElement);
+                return doc.GetElement(reference);
             }
-            return linkedElements;
+            else
+            {
+                return RevitApp.Doc.GetElement(reference);
+            }
         }
-        public static Element GetLinkedElement(this Reference reference, out Transform transform)
+
+        public static T Element<T>(this Reference reference, Document doc = null) where T : Element
         {
-            RevitLinkInstance rlin = reference.ElementId.Element<RevitLinkInstance>();
-            transform = rlin.GetTransform();
-            Document linkedDoc = rlin.GetLinkDocument();
-            return reference.LinkedElementId.Element(linkedDoc);
+            return reference.Element(doc) as T;
         }
-        public static Element GetLinkedElement(this Reference reference)
+
+        public static List<Element> Elements(this IList<Reference> references)
         {
-            RevitLinkInstance rlin = reference.ElementId.Element<RevitLinkInstance>();
-            Document linkedDoc = rlin.GetLinkDocument();
-            return reference.LinkedElementId.Element(linkedDoc);
+            return references.Select(x => x.Element()).ToList();
+        }
+
+        public static List<T> Elements<T>(this IList<Reference> references) where T : Element
+        {
+            return references.Select(x => x.Element<T>()).ToList();
         }
     }
 }

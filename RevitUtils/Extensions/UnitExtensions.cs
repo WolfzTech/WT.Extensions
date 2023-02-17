@@ -1,6 +1,9 @@
-﻿namespace System
+﻿using Autodesk.Revit.DB;
+using System.Windows;
+
+namespace System
 {
-    public static class DoubleExtenstions
+    public static class UnitExtensions
     {
         public static double FeetToCm(this double dou)
         {
@@ -33,6 +36,18 @@
         public static double DegreeToRadian(this double dou)
         {
             return dou * Math.PI / 180;
+        }
+
+
+        public static double UnitConvert(this double value, ForgeTypeId sourceUnit, ForgeTypeId destinationUnit)
+        {
+            var internalValue=UnitUtils.ConvertFromInternalUnits(value, sourceUnit);
+            return UnitUtils.ConvertToInternalUnits(internalValue, destinationUnit);
+        }
+
+        public static double UnitConvert(this int value, ForgeTypeId sourceUnit, ForgeTypeId destinationUnit)
+        {
+            return value * 1.0.UnitConvert(sourceUnit, destinationUnit);
         }
     }
 }

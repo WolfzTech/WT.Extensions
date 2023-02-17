@@ -48,17 +48,17 @@ namespace PT_REVIT
 
         public static Transaction NewTransaction(string name)
         {
-            return new Transaction(Doc,name);
+            return new Transaction(Doc, name);
         }
 
         public static List<T> FilteredElementCollector<T>(BuiltInCategory category) where T : Element
         {
             return new FilteredElementCollector(Doc).OfClass(typeof(T)).OfCategory(category).Cast<T>().ToList();
         }
-        
-        public static List<T> FilteredElementCollector<T>(BuiltInCategory category,bool whereElementIsElementType) where T : Element
+
+        public static List<T> FilteredElementCollector<T>(BuiltInCategory category, bool whereElementIsElementType) where T : Element
         {
-            if(whereElementIsElementType)
+            if (whereElementIsElementType)
             {
                 return new FilteredElementCollector(Doc).OfClass(typeof(T)).OfCategory(category).WhereElementIsElementType().Cast<T>().ToList();
             }
@@ -73,7 +73,7 @@ namespace PT_REVIT
             return new FilteredElementCollector(Doc).OfClass(typeof(T)).Cast<T>().ToList();
         }
 
-        public static List<T> FilteredElementCollector<T>( bool whereElementIsElementType) where T : Element
+        public static List<T> FilteredElementCollector<T>(bool whereElementIsElementType) where T : Element
         {
             if (whereElementIsElementType)
             {
@@ -84,10 +84,10 @@ namespace PT_REVIT
                 return new FilteredElementCollector(Doc).OfClass(typeof(T)).WhereElementIsNotElementType().Cast<T>().ToList();
             }
         }
-        
+
         public static List<T> ActiveViewFilteredElementCollector<T>(BuiltInCategory category) where T : Element
         {
-            return new FilteredElementCollector(Doc,Doc.ActiveView.Id).OfClass(typeof(T)).OfCategory(category).Cast<T>().ToList();
+            return new FilteredElementCollector(Doc, Doc.ActiveView.Id).OfClass(typeof(T)).OfCategory(category).Cast<T>().ToList();
         }
 
         public static List<T> ActiveViewFilteredElementCollector<T>(BuiltInCategory category, bool whereElementIsElementType) where T : Element
@@ -101,7 +101,7 @@ namespace PT_REVIT
                 return new FilteredElementCollector(Doc, Doc.ActiveView.Id).OfClass(typeof(T)).OfCategory(category).WhereElementIsNotElementType().Cast<T>().ToList();
             }
         }
-        
+
         public static List<T> SelectionElementCollector<T>(BuiltInCategory category) where T : Element
         {
             return new FilteredElementCollector(Doc, Selection.GetElementIds()).OfClass(typeof(T)).OfCategory(category).Cast<T>().ToList();
