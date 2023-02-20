@@ -38,7 +38,18 @@ namespace System
             return dou * Math.PI / 180;
         }
 
+#if Revit2018||Revit2019||Revit2020
+        public static double UnitConvert(this double value, DisplayUnitType sourceUnit, DisplayUnitType destinationUnit)
+        {
+            var internalValue = UnitUtils.ConvertFromInternalUnits(value, sourceUnit);
+            return UnitUtils.ConvertToInternalUnits(internalValue, destinationUnit);
+        }
 
+        public static double UnitConvert(this int value, DisplayUnitType sourceUnit, DisplayUnitType destinationUnit)
+        {
+            return value * 1.0.UnitConvert(sourceUnit, destinationUnit);
+        }
+#else
         public static double UnitConvert(this double value, ForgeTypeId sourceUnit, ForgeTypeId destinationUnit)
         {
             var internalValue=UnitUtils.ConvertFromInternalUnits(value, sourceUnit);
@@ -49,5 +60,6 @@ namespace System
         {
             return value * 1.0.UnitConvert(sourceUnit, destinationUnit);
         }
+#endif
     }
 }
