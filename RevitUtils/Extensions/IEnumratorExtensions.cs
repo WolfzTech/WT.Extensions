@@ -12,7 +12,7 @@
             return list;
         }
         
-        public static void Add<T>(this IList<T> e,List<T> list)
+        public static void AddRange<T>(this IList<T> e,List<T> list)
         {
             foreach(T item in list)
             {
@@ -20,7 +20,7 @@
             }
         }
         
-        public static void Add<T>(this IList<T> e, IEnumerable<T> list)
+        public static void AddRange<T>(this IList<T> e, IEnumerable<T> list)
         {
             foreach (T item in list)
             {
