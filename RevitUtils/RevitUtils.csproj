@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="Extensions\CurveExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\UnitExtensions.cs" />
     <Compile Include="Extensions\ElementExtensions.cs" />
     <Compile Include="Extensions\ElementIdExtensions.cs" />
