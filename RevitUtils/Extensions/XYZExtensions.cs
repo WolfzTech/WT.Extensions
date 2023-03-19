@@ -16,12 +16,23 @@ namespace Autodesk.Revit.DB
         {
             return line.Project(point).XYZPoint;
         }
-        
+
+        public static double ProjectDistanceToLine(this XYZ point, Line line)
+        {
+            return line.Project(point).Distance;
+        }
+
         public static XYZ ProjectToPlane(this XYZ point, Plane plane)
         {
             return point.ProjectToPlane(plane, out _, out _);
         }
-        
+
+        public static double ProjectDistanceToPlane(this XYZ point, Plane plane)
+        {
+            plane.Project(point, out _, out var distance);
+            return distance;
+        }
+
         public static XYZ ProjectToPlane(this XYZ point, Plane plane, out UV uv, out double distance)
         {
             plane.Project(point, out uv, out distance);
