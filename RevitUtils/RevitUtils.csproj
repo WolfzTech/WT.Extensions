@@ -7,7 +7,7 @@
     <ProjectGuid>{6E68E272-9DBA-44C3-9839-8BAF62C175C5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RevitUtils</RootNamespace>
+    <RootNamespace>TWolfz.Revit</RootNamespace>
     <AssemblyName>RevitUtils</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

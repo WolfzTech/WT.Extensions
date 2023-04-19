@@ -12,13 +12,13 @@ namespace Autodesk.Revit.DB
         public static void SetCategoryOverrides(this View view, BuiltInCategory categoryId, bool projectionFill, bool cutFill, Document doc)
         {
             OverrideGraphicSettings oGS = view.GetCategoryOverrides(doc.Settings.Categories.get_Item(categoryId).Id);
-#if !Revit2018 && !Revit2018C
+#if !Revit2018 
             oGS.SetSurfaceForegroundPatternVisible(projectionFill);
             oGS.SetCutForegroundPatternVisible(cutFill);
 #endif
             view.SetCategoryOverrides(doc.Settings.Categories.get_Item(categoryId).Id, oGS);
         }
-#if !Revit2018 && !Revit2018C
+#if !Revit2018
         public static void SetCategoryOverrides(this View view, BuiltInCategory categoryId, bool projectionFill, bool cutFill, Color color, Document doc)
         {
             OverrideGraphicSettings oGS = view.GetCategoryOverrides(doc.Settings.Categories.get_Item(categoryId).Id);

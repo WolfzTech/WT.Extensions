@@ -29,6 +29,7 @@ namespace Autodesk.Revit.DB
             return (GetLines, GetSolids);
         }
     }
+
     public static class GridExtensions
     {
         public static Line GetLine(this Grid grid, View view)
@@ -48,7 +49,6 @@ namespace Autodesk.Revit.DB
         }
     }
   
-
     public static class ParameterExtensions
     {
         public static string StringValue(this Parameter parameter)

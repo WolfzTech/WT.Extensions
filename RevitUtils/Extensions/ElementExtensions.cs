@@ -78,6 +78,7 @@ namespace Autodesk.Revit.DB
             }
             else return new XYZ();
         }
+
         public static XYZ MidPoint(this Element element)
         {
             var location = element.Location;
@@ -95,6 +96,7 @@ namespace Autodesk.Revit.DB
             }
             else return new XYZ();
         }
+
         public static bool IsHorizontal(this Element element, View view)
         {
             LocationCurve locationCurve = element.Location as LocationCurve;
@@ -109,6 +111,7 @@ namespace Autodesk.Revit.DB
             }
             return false;
         }
+
         public static bool IsVertical(this Element element, View view)
         {
             LocationCurve locationCurve = element.Location as LocationCurve;
