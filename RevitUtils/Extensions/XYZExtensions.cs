@@ -6,12 +6,12 @@ namespace Autodesk.Revit.DB
     public static class XYZExtensions
     {
         public static string Result = string.Empty;
-        
+
         public static XYZ ProjectToLine(this XYZ point, XYZ p1, XYZ vector)
         {
             return ProjectToPlane(p1, Plane.CreateByNormalAndOrigin(vector, point));
         }
-        
+
         public static XYZ ProjectToLine(this XYZ point, Line line)
         {
             return line.Project(point).XYZPoint;
@@ -38,13 +38,13 @@ namespace Autodesk.Revit.DB
             plane.Project(point, out uv, out distance);
             return plane.Origin + uv.U * plane.XVec + uv.V * plane.YVec;
         }
-        
+
         public static string Value(this XYZ xyz)
         {
             return "X: " + xyz.X.ToString() + " Y: " + xyz.Y.ToString() + " Z: " + xyz.Z.ToString();
         }
 
-        public static XYZ MidPoint( XYZ xyz1, XYZ xyz2)
+        public static XYZ MidPoint(XYZ xyz1, XYZ xyz2)
         {
             return new XYZ((xyz1.X + xyz2.X) / 2, (xyz1.Y + xyz2.Y) / 2, (xyz1.Z + xyz2.Z) / 2);
         }

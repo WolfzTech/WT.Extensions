@@ -17,19 +17,22 @@
             var list = new List<T>();
             while (e.MoveNext())
             {
-                list.Add((T)e.Current);
+                if (e.Current is T t)
+                {
+                    list.Add(t);
+                }
             }
             return list;
         }
 
-        public static void AddRange<T>(this IList<T> e,List<T> list)
+        public static void AddRange<T>(this IList<T> e, List<T> list)
         {
-            foreach(T item in list)
+            foreach (T item in list)
             {
                 e.Add(item);
             }
         }
-        
+
         public static void AddRange<T>(this IList<T> e, IEnumerable<T> list)
         {
             foreach (T item in list)
