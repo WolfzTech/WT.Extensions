@@ -70,6 +70,15 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'R2024|AnyCPU'">
+    <RevitVersion>2024</RevitVersion>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\R2024\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;Revit2024</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -114,6 +123,7 @@
     <PostBuildEvent>if $(ConfigurationName) == R2020 copy "$(ProjectDir)$(OutputPath)" "$(ProjectDir)\..\Ref\2020"
 if $(ConfigurationName) == R2021 copy "$(ProjectDir)$(OutputPath)" "$(ProjectDir)\..\Ref\2021"
 if $(ConfigurationName) == R2022 copy "$(ProjectDir)$(OutputPath)" "$(ProjectDir)\..\Ref\2022"
-if $(ConfigurationName) == R2023 copy "$(ProjectDir)$(OutputPath)" "$(ProjectDir)\..\Ref\2023"</PostBuildEvent>
+if $(ConfigurationName) == R2023 copy "$(ProjectDir)$(OutputPath)" "$(ProjectDir)\..\Ref\2023"
+if $(ConfigurationName) == R2024 copy "$(ProjectDir)$(OutputPath)" "$(ProjectDir)\..\Ref\2024"</PostBuildEvent>
   </PropertyGroup>
 </Project>
