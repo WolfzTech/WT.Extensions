@@ -51,6 +51,11 @@ namespace TWolfz.Revit
             return new Transaction(Doc, name);
         }
 
+        public static List<Element> FilteredElementCollector(BuiltInCategory category)
+        {
+            return new FilteredElementCollector(Doc).OfCategory(category).Cast<Element>().ToList();
+        }
+
         public static List<T> FilteredElementCollector<T>(BuiltInCategory category) where T : Element
         {
             return new FilteredElementCollector(Doc).OfClass(typeof(T)).OfCategory(category).Cast<T>().ToList();
