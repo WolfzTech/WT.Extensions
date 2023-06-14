@@ -94,6 +94,7 @@
     <Reference Include="System.Xml" />
     <PackageReference Include="Nice3point.Revit.Api.RevitAPI" Version="$(RevitVersion).*" />
     <PackageReference Include="Nice3point.Revit.Api.RevitAPIUI" Version="$(RevitVersion).*" />
+    <PackageReference Include="Nice3point.Revit.Api.AdWindows" Version="2023.*" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\CurveExtensions.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Extensions\XYZExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RevitApp.cs" />
+    <Compile Include="Utilities\RibbonUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
