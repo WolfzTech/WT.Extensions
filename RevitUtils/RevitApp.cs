@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TWolfz.Revit
+namespace WT.Revit
 {
     public static class RevitApp
     {
