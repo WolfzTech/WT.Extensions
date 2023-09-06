@@ -8,6 +8,12 @@ namespace System
         {
             return dou * 30.48;
         }
+
+        /// <summary>
+        /// Multiply the length value by 304.8
+        /// </summary>
+        /// <param name="dou"></param>
+        /// <returns></returns>
         public static double FeetToMm(this double dou)
         {
             return dou * 304.8;
