@@ -1,5 +1,8 @@
 ﻿using Autodesk.Revit.DB.Architecture;
+using JetBrains.Annotations;
 using System;
+using System.Diagnostics.Contracts;
+using PureAttribute = JetBrains.Annotations.PureAttribute;
 
 namespace Autodesk.Revit.DB
 {
@@ -125,6 +128,44 @@ namespace Autodesk.Revit.DB
                 { return true; }
             }
             return false;
+        }
+
+        [Pure]
+        [CanBeNull]
+        public static Parameter GetParameter([NotNull] this Element element, Definition definition)
+        {
+            Parameter parameter = element.get_Parameter(definition);
+            if (parameter != null && parameter.HasValue)
+            {
+                return parameter;
+            }
+
+            ElementId typeId = element.GetTypeId();
+            if (typeId == ElementId.InvalidElementId)
+            {
+                return parameter;
+            }
+
+            return element.Document.GetElement(typeId).get_Parameter(definition) ?? parameter;
+        }
+
+        [Pure]
+        [CanBeNull]
+        public static Parameter GetParameter([NotNull] this Element element, Guid guid)
+        {
+            Parameter parameter = element.get_Parameter(guid);
+            if (parameter != null && parameter.HasValue)
+            {
+                return parameter;
+            }
+
+            ElementId typeId = element.GetTypeId();
+            if (typeId == ElementId.InvalidElementId)
+            {
+                return parameter;
+            }
+
+            return element.Document.GetElement(typeId).get_Parameter(guid) ?? parameter;
         }
     }
 }
