@@ -73,7 +73,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'R2024|AnyCPU'">
     <RevitVersion>2024</RevitVersion>
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\R2024\</OutputPath>
+    <OutputPath>bin\2024\</OutputPath>
     <DefineConstants>TRACE;DEBUG;Revit2024</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
