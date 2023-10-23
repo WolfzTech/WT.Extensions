@@ -1,7 +1,6 @@
 ﻿using Autodesk.Revit.DB.Architecture;
 using JetBrains.Annotations;
 using System;
-using System.Diagnostics.Contracts;
 using PureAttribute = JetBrains.Annotations.PureAttribute;
 
 namespace Autodesk.Revit.DB
