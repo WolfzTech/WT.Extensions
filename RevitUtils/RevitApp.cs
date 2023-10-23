@@ -51,6 +51,8 @@ namespace WT.Revit
             return new Transaction(Doc, name);
         }
 
+        public static LanguageType Language => App.Language;
+
         public static List<Element> FilteredElementCollector(BuiltInCategory category)
         {
             return new FilteredElementCollector(Doc).OfCategory(category).Cast<Element>().ToList();
@@ -88,6 +90,11 @@ namespace WT.Revit
             {
                 return new FilteredElementCollector(Doc).OfClass(typeof(T)).WhereElementIsNotElementType().Cast<T>().ToList();
             }
+        }
+
+        public static List<T> ViewFilteredElementCollector<T>(View view, BuiltInCategory category) where T : Element
+        {
+            return new FilteredElementCollector(Doc, view.Id).OfClass(typeof(T)).OfCategory(category).Cast<T>().ToList();
         }
 
         public static List<T> ActiveViewFilteredElementCollector<T>(BuiltInCategory category) where T : Element
