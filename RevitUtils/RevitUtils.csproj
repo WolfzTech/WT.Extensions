@@ -108,8 +108,12 @@
     <Compile Include="Extensions\XYZExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RevitApp.cs" />
+    <Compile Include="UI\Converter\BoolInverse.cs" />
+    <Compile Include="UI\Converter\BoolInverseToVisibility.cs" />
+    <Compile Include="UI\Converter\BoolToVisibility.cs" />
     <Compile Include="Utilities\RibbonUtils.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == R2020 copy "$(ProjectDir)$(OutputPath)" "$(ProjectDir)\..\Ref\2020"
