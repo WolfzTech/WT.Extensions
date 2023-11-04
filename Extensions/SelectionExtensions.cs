@@ -15,5 +15,10 @@ namespace Autodesk.Revit.UI.Selection
         {
             return sel.GetElementIds().Select(x => x.Element()).FirstOrDefault();
         }
+
+        public static T GetElement<T>(this Selection sel) where T : Element
+        {
+            return sel.GetElementIds().Select(x => x.Element()).FirstOrDefault() as T;
+        }
     }
 }
