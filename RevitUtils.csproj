@@ -117,10 +117,10 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == R2020 copy "$(ProjectDir)$(OutputPath)" "$(ProjectDir)\..\Ref\2020"
-if $(ConfigurationName) == R2021 copy "$(ProjectDir)$(OutputPath)" "$(ProjectDir)\..\Ref\2021"
-if $(ConfigurationName) == R2022 copy "$(ProjectDir)$(OutputPath)" "$(ProjectDir)\..\Ref\2022"
-if $(ConfigurationName) == R2023 copy "$(ProjectDir)$(OutputPath)" "$(ProjectDir)\..\Ref\2023"
-if $(ConfigurationName) == R2024 copy "$(ProjectDir)$(OutputPath)" "$(ProjectDir)\..\Ref\2024"</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == R2020 copy "$(ProjectDir)$(OutputPath)" "$(ProjectDir)\Ref\2020"
+if $(ConfigurationName) == R2021 copy "$(ProjectDir)$(OutputPath)" "$(ProjectDir)\Ref\2021"
+if $(ConfigurationName) == R2022 copy "$(ProjectDir)$(OutputPath)" "$(ProjectDir)\Ref\2022"
+if $(ConfigurationName) == R2023 copy "$(ProjectDir)$(OutputPath)" "$(ProjectDir)\Ref\2023"
+if $(ConfigurationName) == R2024 copy "$(ProjectDir)$(OutputPath)" "$(ProjectDir)\Ref\2024"</PostBuildEvent>
   </PropertyGroup>
 </Project>

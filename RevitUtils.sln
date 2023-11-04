@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitUtils", "RevitUtils\RevitUtils.csproj", "{6E68E272-9DBA-44C3-9839-8BAF62C175C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitUtils", "RevitUtils.csproj", "{6E68E272-9DBA-44C3-9839-8BAF62C175C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
