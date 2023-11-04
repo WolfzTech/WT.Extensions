@@ -49,17 +49,7 @@ namespace Autodesk.Revit.DB
         }
     }
   
-    public static class ParameterExtensions
-    {
-        public static string StringValue(this Parameter parameter)
-        {
-            string stringValue = parameter.AsValueString();
-            if (string.IsNullOrEmpty(stringValue)) stringValue = parameter.AsString();
-            if (string.IsNullOrEmpty(stringValue)) stringValue = parameter.AsInteger().ToString();
-            if (string.IsNullOrEmpty(stringValue) && parameter.AsInteger() == 0) stringValue = parameter.AsDouble().ToString();
-            return stringValue;
-        }
-    }
+
     
     public static class PlaneExtensions
     {
