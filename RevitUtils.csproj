@@ -90,6 +90,7 @@
     <Compile Include="Extensions\CurveExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="Extensions\DocumentExtensions.cs" />
     <Compile Include="Extensions\ParameterExtensions.cs" />
     <Compile Include="Extensions\UnitExtensions.cs" />
     <Compile Include="Extensions\ElementExtensions.cs" />

@@ -46,9 +46,28 @@ namespace WT.Revit
 
         public static View ActiveView => Doc.ActiveView;
 
-        public static Transaction NewTransaction(string name)
+        public static Transaction NewTransaction(string name, Document doc = null)
         {
-            return new Transaction(Doc, name);
+            if (doc == null)
+            {
+                return new Transaction(Doc, name);
+            }
+            else
+            {
+                return new Transaction(doc, name);
+            }
+        }
+
+        public static TransactionGroup NewTransactionGroup(string name, Document doc = null)
+        {
+            if (doc == null)
+            {
+                return new TransactionGroup(Doc, name);
+            }
+            else
+            {
+                return new TransactionGroup(doc, name);
+            }
         }
 
         public static LanguageType Language => App.Language;
@@ -95,6 +114,19 @@ namespace WT.Revit
         public static List<T> ViewFilteredElementCollector<T>(View view, BuiltInCategory category) where T : Element
         {
             return new FilteredElementCollector(Doc, view.Id).OfClass(typeof(T)).OfCategory(category).Cast<T>().ToList();
+        }
+
+        public static List<T> ViewFilteredElementCollector<T>(View view, BuiltInCategory category, bool whereElementIsElementType) where T : Element
+        {
+            var elements = new FilteredElementCollector(Doc, view.Id).OfClass(typeof(T)).OfCategory(category);
+            if (whereElementIsElementType)
+            {
+                return elements.WhereElementIsElementType().Cast<T>().ToList();
+            }
+            else
+            {
+                return elements.WhereElementIsNotElementType().Cast<T>().ToList();
+            }
         }
 
         public static List<T> ActiveViewFilteredElementCollector<T>(BuiltInCategory category) where T : Element
