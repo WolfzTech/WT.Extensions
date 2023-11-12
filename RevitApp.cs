@@ -113,12 +113,12 @@ namespace WT.Revit
 
         public static List<T> ViewFilteredElementCollector<T>(View view, BuiltInCategory category) where T : Element
         {
-            return new FilteredElementCollector(Doc, view.Id).OfClass(typeof(T)).OfCategory(category).Cast<T>().ToList();
+            return new FilteredElementCollector(view.Document, view.Id).OfClass(typeof(T)).OfCategory(category).Cast<T>().ToList();
         }
 
         public static List<T> ViewFilteredElementCollector<T>(View view, BuiltInCategory category, bool whereElementIsElementType) where T : Element
         {
-            var elements = new FilteredElementCollector(Doc, view.Id).OfClass(typeof(T)).OfCategory(category);
+            var elements = new FilteredElementCollector(view.Document, view.Id).OfClass(typeof(T)).OfCategory(category);
             if (whereElementIsElementType)
             {
                 return elements.WhereElementIsElementType().Cast<T>().ToList();

@@ -29,27 +29,6 @@ namespace Autodesk.Revit.DB
             return (GetLines, GetSolids);
         }
     }
-
-    public static class GridExtensions
-    {
-        public static Line GetLine(this Grid grid, View view)
-        {
-            Options options = new Options
-            {
-                View = view
-            };
-            GeometryElement geometryelement = grid.get_Geometry(options);
-            List<GeometryObject> geometryobjects = geometryelement.GetEnumerator().ToList();
-            Line gridLine = null;
-            foreach (GeometryObject geometryObject in geometryobjects)
-            {
-                gridLine = geometryObject as Line;
-            }
-            return gridLine;
-        }
-    }
-  
-
     
     public static class PlaneExtensions
     {
