@@ -53,5 +53,15 @@ namespace System
         {
             return value * 1.0.UnitConvert(sourceUnit, destinationUnit);
         }
+
+        public static double SqMeterToSqFeet(this double dou)
+        {
+            return dou * 10.7639;
+        }
+
+        public static double SqFeetToSqMeter(this double dou)
+        {
+            return dou / 10.7639;
+        }
     }
 }
