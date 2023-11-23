@@ -114,6 +114,7 @@
     <Compile Include="UI\Converter\BoolInverse.cs" />
     <Compile Include="UI\Converter\BoolInverseToVisibility.cs" />
     <Compile Include="UI\Converter\BoolToVisibility.cs" />
+    <Compile Include="Utilities\NamingComparer.cs" />
     <Compile Include="Utilities\RibbonUtils.cs" />
   </ItemGroup>
   <ItemGroup />

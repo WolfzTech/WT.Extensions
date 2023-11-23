@@ -45,8 +45,8 @@ namespace System
 
         public static double UnitConvert(this double value, ForgeTypeId sourceUnit, ForgeTypeId destinationUnit)
         {
-            var internalValue=UnitUtils.ConvertFromInternalUnits(value, sourceUnit);
-            return UnitUtils.ConvertToInternalUnits(internalValue, destinationUnit);
+            var internalValue=UnitUtils.ConvertToInternalUnits(value, sourceUnit);
+            return UnitUtils.ConvertFromInternalUnits(internalValue, destinationUnit);
         }
 
         public static double UnitConvert(this int value, ForgeTypeId sourceUnit, ForgeTypeId destinationUnit)
