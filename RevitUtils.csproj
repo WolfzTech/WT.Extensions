@@ -73,6 +73,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -114,6 +115,7 @@
     <Compile Include="UI\Converter\BoolInverse.cs" />
     <Compile Include="UI\Converter\BoolInverseToVisibility.cs" />
     <Compile Include="UI\Converter\BoolToVisibility.cs" />
+    <Compile Include="UI\DetailMessage.cs" />
     <Compile Include="Utilities\NamingComparer.cs" />
     <Compile Include="Utilities\RibbonUtils.cs" />
   </ItemGroup>
