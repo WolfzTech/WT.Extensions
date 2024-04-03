@@ -176,10 +176,14 @@ namespace WT.Revit.Utilities
         }
         public static bool Swap(this AW.RibbonRowPanel ribbonRowPanel, int x, int y)
         {
-            if (ribbonRowPanel.Items.Count <= y || ribbonRowPanel.Items.Count <= x) return false;
-            // swap index x and y
-            (ribbonRowPanel.Items[y], ribbonRowPanel.Items[x]) = (ribbonRowPanel.Items[x], ribbonRowPanel.Items[y]);
-            return true;
+            if (ribbonRowPanel.Items.Count > y && ribbonRowPanel.Items.Count > x)
+            {
+                // swap index x and y
+                (ribbonRowPanel.Items[y], ribbonRowPanel.Items[x]) = (ribbonRowPanel.Items[x], ribbonRowPanel.Items[y]);
+                return true;
+            }
+
+            return false;
         }
     }
 }
