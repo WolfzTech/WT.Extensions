@@ -4,7 +4,6 @@
 	<OutputPath>bin\$(Configuration)\</OutputPath>
 	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <RootNamespace>WT.Revit</RootNamespace>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
 	    <Configurations>Debug;Release;R21;R22;R23;R24;R25</Configurations>
