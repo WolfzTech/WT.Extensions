@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Autodesk.Revit.DB
 {
@@ -68,12 +67,12 @@ namespace Autodesk.Revit.DB
                 isVectorParalellWithNormal = true;
             if (isInPlane)
             {
-                XYZExtensions.Result = "LineInView";
+                //XYZExtensions.Result = "LineInView";
                 return point;
             }
             if (isVectorParalellWithNormal && !isInPlane)
             {
-                XYZExtensions.Result = "LineParalleView";
+                //XYZExtensions.Result = "LineParalleView";
                 return null;
             }
             if (!isVectorParalellWithNormal && !isInPlane)

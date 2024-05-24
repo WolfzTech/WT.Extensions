@@ -106,7 +106,7 @@ namespace Autodesk.Revit.DB
             if (curve is Line)
             {
                 Line line = curve as Line;
-                line = line.ProjectToPlane(view.SketchPlane.GetPlane()) as Line;
+                line = line.Project(view.SketchPlane.GetPlane()) as Line;
                 if (Math.Round(line.Direction.AngleTo(view.RightDirection).RadianToDegree(), 2) == 0.00
                     || Math.Round(line.Direction.AngleTo(view.RightDirection).RadianToDegree(), 2) == 180.00)
                 { return true; }
@@ -121,7 +121,7 @@ namespace Autodesk.Revit.DB
             if (curve is Line)
             {
                 Line line = curve as Line;
-                line = line.ProjectToPlane(view.SketchPlane.GetPlane()) as Line;
+                line = line.Project(view.SketchPlane.GetPlane()) as Line;
                 if (Math.Round(line.Direction.AngleTo(view.RightDirection).RadianToDegree(), 2) == 90.00
                    || Math.Round(line.Direction.AngleTo(view.RightDirection).RadianToDegree(), 2) == 270.00)
                 { return true; }

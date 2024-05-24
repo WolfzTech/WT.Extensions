@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "RevitUtils/1.0.0": {
+      "WT.RevitUtils/1.0.0": {
         "dependencies": {
           "JetBrains.Annotations": "2023.3.0",
           "Microsoft.CSharp": "4.7.0",
@@ -16,7 +16,7 @@
           "System.Data.DataSetExtensions": "4.5.0"
         },
         "runtime": {
-          "RevitUtils.dll": {}
+          "WT.RevitUtils.dll": {}
         }
       },
       "JetBrains.Annotations/2023.3.0": {
@@ -35,7 +35,7 @@
     }
   },
   "libraries": {
-    "RevitUtils/1.0.0": {
+    "WT.RevitUtils/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

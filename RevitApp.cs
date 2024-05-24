@@ -44,7 +44,14 @@ namespace WT.Revit
 
         public static Selection Selection => UiDoc.Selection;
 
-        public static View ActiveView => Doc.ActiveView;
+        public static View ActiveView
+        {
+            get
+            {
+                var activeViewId = UiDoc.GetOpenUIViews()[0].ViewId;
+                return activeViewId.Element<View>();
+            }
+        }
 
         public static Transaction NewTransaction(string name, Document doc = null)
         {
@@ -94,6 +101,18 @@ namespace WT.Revit
             }
         }
 
+        public static List<Element> FilteredElementCollector(BuiltInCategory category, bool whereElementIsElementType) 
+        {
+            if (whereElementIsElementType)
+            {
+                return new FilteredElementCollector(Doc).OfCategory(category).WhereElementIsElementType().ToElements().ToList();
+            }
+            else
+            {
+                return new FilteredElementCollector(Doc).OfCategory(category).WhereElementIsNotElementType().ToElements().ToList();
+            }
+        }
+
         public static List<T> FilteredElementCollector<T>() where T : Element
         {
             return new FilteredElementCollector(Doc).OfClass(typeof(T)).Cast<T>().ToList();
@@ -109,6 +128,11 @@ namespace WT.Revit
             {
                 return new FilteredElementCollector(Doc).OfClass(typeof(T)).WhereElementIsNotElementType().Cast<T>().ToList();
             }
+        }
+
+        public static List<T> ViewFilteredElementCollector<T>(View view) where T : Element
+        {
+            return new FilteredElementCollector(view.Document, view.Id).OfClass(typeof(T)).Cast<T>().ToList();
         }
 
         public static List<T> ViewFilteredElementCollector<T>(View view, BuiltInCategory category) where T : Element
@@ -132,6 +156,18 @@ namespace WT.Revit
         public static List<T> ActiveViewFilteredElementCollector<T>(BuiltInCategory category) where T : Element
         {
             return new FilteredElementCollector(Doc, Doc.ActiveView.Id).OfClass(typeof(T)).OfCategory(category).Cast<T>().ToList();
+        }
+
+        public static List<T> ActiveViewFilteredElementCollector<T>(bool whereElementIsElementType) where T : Element
+        {
+            if (whereElementIsElementType)
+            {
+                return new FilteredElementCollector(Doc, Doc.ActiveView.Id).OfClass(typeof(T)).WhereElementIsElementType().Cast<T>().ToList();
+            }
+            else
+            {
+                return new FilteredElementCollector(Doc, Doc.ActiveView.Id).OfClass(typeof(T)).WhereElementIsNotElementType().Cast<T>().ToList();
+            }
         }
 
         public static List<T> ActiveViewFilteredElementCollector<T>(BuiltInCategory category, bool whereElementIsElementType) where T : Element

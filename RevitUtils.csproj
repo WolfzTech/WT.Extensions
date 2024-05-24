@@ -1,60 +1,68 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Library</OutputType>
-	<OutputPath>bin\$(Configuration)\</OutputPath>
-	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <RootNamespace>WT.Revit</RootNamespace>
-    <UseWindowsForms>true</UseWindowsForms>
-    <UseWPF>true</UseWPF>
-	    <Configurations>Debug;Release;R21;R22;R23;R24;R25</Configurations>
-  </PropertyGroup>
-   <PropertyGroup Condition="$(Configuration.Contains('R21'))">
-        <RevitVersion>2021</RevitVersion>
-        <TargetFramework>net48</TargetFramework>
-        <DefineConstants>$(DefineConstants);R21</DefineConstants>
-        <DefineConstants>$(DefineConstants);R21_OR_GREATER</DefineConstants>
-    </PropertyGroup>
-    <PropertyGroup Condition="$(Configuration.Contains('R22'))">
-        <RevitVersion>2022</RevitVersion>
-        <TargetFramework>net48</TargetFramework>
-        <DefineConstants>$(DefineConstants);R22</DefineConstants>
-        <DefineConstants>$(DefineConstants);R21_OR_GREATER;R22_OR_GREATER</DefineConstants>
-    </PropertyGroup>
-    <PropertyGroup Condition="$(Configuration.Contains('R23'))">
-        <RevitVersion>2023</RevitVersion>
-        <TargetFramework>net48</TargetFramework>
-        <DefineConstants>$(DefineConstants);R23</DefineConstants>
-        <DefineConstants>$(DefineConstants);R21_OR_GREATER;R22_OR_GREATER;R23_OR_GREATER</DefineConstants>
-    </PropertyGroup>
-    <PropertyGroup Condition="$(Configuration.Contains('R24'))">
-        <RevitVersion>2024</RevitVersion>
-        <TargetFramework>net48</TargetFramework>
-        <DefineConstants>$(DefineConstants);R24</DefineConstants>
-        <DefineConstants>$(DefineConstants);R21_OR_GREATER;R22_OR_GREATER;R23_OR_GREATER;R24_OR_GREATER</DefineConstants>
-    </PropertyGroup>
-    <PropertyGroup Condition="$(Configuration.Contains('R25'))">
-        <RevitVersion>2025</RevitVersion>
-        <TargetFramework>net8.0-windows</TargetFramework>
-        <DefineConstants>$(DefineConstants);R25</DefineConstants>
-        <DefineConstants>$(DefineConstants);R21_OR_GREATER;R22_OR_GREATER;R23_OR_GREATER;R24_OR_GREATER;R25_OR_GREATER</DefineConstants>
-    </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations">
-      <Version>2023.3.0</Version>
-    </PackageReference>
-    <PackageReference Include="Nice3point.Revit.Api.AdWindows" Version="$(RevitVersion).*-*" PrivateAssets="all" />
-	  <PackageReference Include="Nice3point.Revit.Api.RevitAPI" Version="$(RevitVersion).*-*" PrivateAssets="all" />
-        <PackageReference Include="Nice3point.Revit.Api.RevitAPIUI" Version="$(RevitVersion).*-*" PrivateAssets="all" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-  </ItemGroup>
-  <PropertyGroup>
-    <PlatformTarget>x64</PlatformTarget>
-  </PropertyGroup>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy &quot;$(ProjectDir)bin\$(Configuration)&quot; &quot;$(ProjectDir)Ref\$(RevitVersion)&quot;  /s /y&#xD;&#xA;" />
-  </Target>
-  
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<OutputPath>bin\$(Configuration)\</OutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<RootNamespace>WT.Revit</RootNamespace>
+		<UseWindowsForms>true</UseWindowsForms>
+		<UseWPF>true</UseWPF>
+		<Configurations>Debug;Release;R21;R22;R23;R24;R25</Configurations>
+		<LangVersion>12.0</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(Configuration.Contains('R21'))">
+		<RevitVersion>2021</RevitVersion>
+		<TargetFramework>net48</TargetFramework>
+		<DefineConstants>$(DefineConstants);R21</DefineConstants>
+		<DefineConstants>$(DefineConstants);R21_OR_GREATER</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(Configuration.Contains('R22'))">
+		<RevitVersion>2022</RevitVersion>
+		<TargetFramework>net48</TargetFramework>
+		<DefineConstants>$(DefineConstants);R22</DefineConstants>
+		<DefineConstants>$(DefineConstants);R21_OR_GREATER;R22_OR_GREATER</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(Configuration.Contains('R23'))">
+		<RevitVersion>2023</RevitVersion>
+		<TargetFramework>net48</TargetFramework>
+		<DefineConstants>$(DefineConstants);R23</DefineConstants>
+		<DefineConstants>$(DefineConstants);R21_OR_GREATER;R22_OR_GREATER;R23_OR_GREATER</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(Configuration.Contains('R24'))">
+		<RevitVersion>2024</RevitVersion>
+		<TargetFramework>net48</TargetFramework>
+		<DefineConstants>$(DefineConstants);R24</DefineConstants>
+		<DefineConstants>$(DefineConstants);R21_OR_GREATER;R22_OR_GREATER;R23_OR_GREATER;R24_OR_GREATER</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(Configuration.Contains('R25'))">
+		<RevitVersion>2025</RevitVersion>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<DefineConstants>$(DefineConstants);R25</DefineConstants>
+		<DefineConstants>$(DefineConstants);R21_OR_GREATER;R22_OR_GREATER;R23_OR_GREATER;R24_OR_GREATER;R25_OR_GREATER</DefineConstants>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Remove="Ref\**" />
+		<EmbeddedResource Remove="Ref\**" />
+		<None Remove="Ref\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="JetBrains.Annotations">
+			<Version>2023.3.0</Version>
+		</PackageReference>
+		<PackageReference Include="Nice3point.Revit.Api.AdWindows" Version="$(RevitVersion).*-*" PrivateAssets="all" />
+		<PackageReference Include="Nice3point.Revit.Api.RevitAPI" Version="$(RevitVersion).*-*" PrivateAssets="all" />
+		<PackageReference Include="Nice3point.Revit.Api.RevitAPIUI" Version="$(RevitVersion).*-*" PrivateAssets="all" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+		<PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+	</ItemGroup>
+	<PropertyGroup>
+		<PlatformTarget>x64</PlatformTarget>
+		<AssemblyName>WT.$(MSBuildProjectName)</AssemblyName>
+		<AssemblyVersion>24.5.24.0</AssemblyVersion>
+	</PropertyGroup>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="xcopy &quot;$(ProjectDir)bin\$(Configuration)&quot; &quot;$(ProjectDir)Ref\$(RevitVersion)&quot;  /s /y&#xD;&#xA;" />
+	</Target>
+
 </Project>
