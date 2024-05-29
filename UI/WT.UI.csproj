@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>net48;net8.0-windows</TargetFrameworks>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<OutputType>Library</OutputType>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<RootNamespace>$(MSBuildProjectName)</RootNamespace>
+		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
+		<AssemblyTitle>UI</AssemblyTitle>
+		<Product>UI</Product>
+		<Copyright>Copyright ©  2024</Copyright>
+		<AssemblyVersion>24.5.28.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+		<LangVersion>12.0</LangVersion>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+		<PackageReference Include="PropertyChanged.Fody" Version="4.1.0" PrivateAssets="all" />
+		<PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+	</ItemGroup>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="xcopy &quot;$(ProjectDir)bin\$(Configuration)&quot; &quot;$(ProjectDir)..\Ref&quot;  /s /y&#xD;&#xA;" />
+	</Target>
+</Project>

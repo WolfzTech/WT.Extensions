@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace WT.Revit.UI.Converter
+namespace WT.UI.Converter
 {
     public class BoolInverseToVisibility : IValueConverter
     {

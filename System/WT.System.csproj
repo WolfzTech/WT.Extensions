@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>net48;net8.0-windows</TargetFrameworks>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<OutputType>Library</OutputType>
+		<RootNamespace>$(MSBuildProjectName)</RootNamespace>
+		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AssemblyTitle>System</AssemblyTitle>
+		<Product>System</Product>
+		<Copyright>Copyright ©  2024</Copyright>
+		<AssemblyVersion>24.5.28.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+		<LangVersion>12.0</LangVersion>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+		<PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+	</ItemGroup>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="xcopy &quot;$(ProjectDir)bin\$(Configuration)&quot; &quot;$(ProjectDir)..\Ref&quot;  /s /y&#xD;&#xA;" />
+	</Target>
+</Project>

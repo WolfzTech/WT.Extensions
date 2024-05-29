@@ -8,7 +8,15 @@
 		<UseWPF>true</UseWPF>
 		<Configurations>Debug;Release;R21;R22;R23;R24;R25</Configurations>
 		<LangVersion>12.0</LangVersion>
+		<PlatformTarget>x64</PlatformTarget>
+		<AssemblyName>WT.$(MSBuildProjectName)</AssemblyName>
+		<AssemblyVersion>24.5.28.0</AssemblyVersion>
 	</PropertyGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="xcopy &quot;$(ProjectDir)bin\$(Configuration)&quot; &quot;$(ProjectDir)..\Ref\$(RevitVersion)&quot;  /s /y&#xD;&#xA;" />
+	</Target>
+	
 	<PropertyGroup Condition="$(Configuration.Contains('R21'))">
 		<RevitVersion>2021</RevitVersion>
 		<TargetFramework>net48</TargetFramework>
@@ -45,9 +53,7 @@
 		<None Remove="Ref\**" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="JetBrains.Annotations">
-			<Version>2023.3.0</Version>
-		</PackageReference>
+		<PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
 		<PackageReference Include="Nice3point.Revit.Api.AdWindows" Version="$(RevitVersion).*-*" PrivateAssets="all" />
 		<PackageReference Include="Nice3point.Revit.Api.RevitAPI" Version="$(RevitVersion).*-*" PrivateAssets="all" />
 		<PackageReference Include="Nice3point.Revit.Api.RevitAPIUI" Version="$(RevitVersion).*-*" PrivateAssets="all" />
@@ -56,13 +62,8 @@
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
 		<PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
 	</ItemGroup>
-	<PropertyGroup>
-		<PlatformTarget>x64</PlatformTarget>
-		<AssemblyName>WT.$(MSBuildProjectName)</AssemblyName>
-		<AssemblyVersion>24.5.24.0</AssemblyVersion>
-	</PropertyGroup>
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="xcopy &quot;$(ProjectDir)bin\$(Configuration)&quot; &quot;$(ProjectDir)Ref\$(RevitVersion)&quot;  /s /y&#xD;&#xA;" />
-	</Target>
+	<ItemGroup>
+	  <ProjectReference Include="..\System\WT.System.csproj" />
+	</ItemGroup>
 
 </Project>
