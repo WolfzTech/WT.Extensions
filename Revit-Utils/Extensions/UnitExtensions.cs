@@ -43,7 +43,19 @@ namespace System
             return dou * Math.PI / 180;
         }
 
-        public static double UnitConvert(this double value, ForgeTypeId sourceUnit, ForgeTypeId destinationUnit)
+#if R20
+        public static double UnitConvert(this double value, DisplayUnitType sourceUnit, DisplayUnitType destinationUnit)
+        {
+            var internalValue = UnitUtils.ConvertToInternalUnits(value, sourceUnit);
+            return UnitUtils.ConvertFromInternalUnits(internalValue, destinationUnit);
+        }
+
+        public static double UnitConvert(this int value, DisplayUnitType sourceUnit, DisplayUnitType destinationUnit)
+        {
+            return value * 1.0.UnitConvert(sourceUnit, destinationUnit);
+        }
+#else
+  public static double UnitConvert(this double value, ForgeTypeId sourceUnit, ForgeTypeId destinationUnit)
         {
             var internalValue=UnitUtils.ConvertToInternalUnits(value, sourceUnit);
             return UnitUtils.ConvertFromInternalUnits(internalValue, destinationUnit);
@@ -53,6 +65,8 @@ namespace System
         {
             return value * 1.0.UnitConvert(sourceUnit, destinationUnit);
         }
+#endif
+
 
         public static double SqMeterToSqFeet(this double dou)
         {

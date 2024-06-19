@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AW = Autodesk.Windows;
 
-namespace WT.Revit.Utilities
+namespace WT.Revit.Utils
 {
     public static class RibbonUtils
     {

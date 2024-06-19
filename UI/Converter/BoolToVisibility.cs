@@ -5,24 +5,10 @@ using System.Windows.Data;
 
 namespace WT.UI.Converter
 {
-    public class BoolToVisibility : IValueConverter
+    public class BoolToVisibility : BooleanConverter<Visibility>
     {
-        public object Convert(object value, Type targetType,
-            object parameter, CultureInfo culture)
-        {
-            if (!(value is bool))
-                return null;
-            return (bool)value ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        public object ConvertBack(object value, Type targetType,
-            object parameter, CultureInfo culture)
-        {
-            if (Equals(value, Visibility.Visible))
-                return true;
-            if (Equals(value, Visibility.Collapsed))
-                return false;
-            return null;
-        }
+        public BoolToVisibility() :
+          base(Visibility.Visible, Visibility.Collapsed)
+        { }
     }
 }

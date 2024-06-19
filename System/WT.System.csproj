@@ -6,8 +6,6 @@
 		<RootNamespace>$(MSBuildProjectName)</RootNamespace>
 		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-		<AssemblyTitle>System</AssemblyTitle>
-		<Product>System</Product>
 		<Copyright>Copyright ©  2024</Copyright>
 		<AssemblyVersion>24.5.28.0</AssemblyVersion>
 		<FileVersion>1.0.0.0</FileVersion>

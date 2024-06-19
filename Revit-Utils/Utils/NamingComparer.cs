@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WT.Revit.Utilities
+namespace WT.Revit.Utils
 {
     public class NamingComparer : IComparer<string>
     {
