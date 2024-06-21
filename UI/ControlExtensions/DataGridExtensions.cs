@@ -45,7 +45,7 @@ namespace WT.UI.ControlExtensions
             if (sender is DataGrid dataGrid)
             {
                 IList selectedItems = GetSelectedItems(dataGrid);
-                if (selectedItems != null)
+                if (selectedItems != null && e.OriginalSource == dataGrid)
                 {
                     foreach (var item in e.RemovedItems)
                     {

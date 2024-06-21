@@ -40,7 +40,7 @@ namespace WT.UI.ControlExtensions
             if (sender is ListView listView)
             {
                 IList selectedItems = GetSelectedItems(listView);
-                if (selectedItems != null)
+                if (selectedItems != null && e.OriginalSource == listView)
                 {
                     foreach (var item in e.RemovedItems)
                     {
