@@ -14,7 +14,7 @@ namespace WT.Revit.UI.Validation
                 return new ValidationResult(true, null);
             }
 #else
- if (UnitFormatUtils.TryParse(RevitApp.Doc.GetUnits(), SpecTypeId.Length, value as string, out _))
+            if (UnitFormatUtils.TryParse(RevitApp.Doc.GetUnits(), SpecTypeId.Length, value as string, out _))
             {
                 return new ValidationResult(true, null);
             }
