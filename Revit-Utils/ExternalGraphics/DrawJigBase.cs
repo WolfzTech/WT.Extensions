@@ -136,10 +136,7 @@ namespace WT.ExternalGraphics
                     }
                 }
             }
-            catch (Exception ex)
-            {
-
-            }
+            catch { }
         }
 
         private UIView GetActiveUiView(UIDocument uidoc)

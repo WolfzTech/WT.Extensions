@@ -7,19 +7,13 @@ using Autodesk.Revit.DB.ExternalService;
 
 namespace WT.ExternalGraphics
 {
-    public class DrawingServer : IDirectContext3DServer
+    public class DrawingServer(Document doc) : IDirectContext3DServer
     {
-        private readonly Guid guid;
+        private readonly Guid guid = Guid.NewGuid();
 
         private RenderingPassBufferStorage edgeBufferStorage;
 
-        public DrawingServer(Document doc)
-        {
-          guid = Guid.NewGuid();
-          Document = doc;
-        }
-
-        public Document Document { get; set; }
+        public Document Document { get; set; } = doc;
         public Guid GetServerId()
         {
             return guid;
@@ -82,7 +76,7 @@ namespace WT.ExternalGraphics
             try
             {
                 // Populate geometry buffers if they are not initialized or need updating.
-              CreateBufferStorageForElement(displayStyle, view);
+                CreateBufferStorageForElement(displayStyle, view);
 
                 // Conditionally submit line segment primitives.
                 if (displayStyle != DisplayStyle.Shading && edgeBufferStorage.PrimitiveCount > 0)
@@ -94,15 +88,12 @@ namespace WT.ExternalGraphics
                       edgeBufferStorage.PrimitiveCount);
                 }
             }
-            catch (Exception e)
-            {
-                //
-            }
+            catch { }
         }
 
         public virtual List<Line> PrepareProfile()
         {
-            return new List<Line>();
+            return [];
         }
 
         public virtual void CreateBufferStorageForElement(DisplayStyle displayStyle, View view)
@@ -133,8 +124,10 @@ namespace WT.ExternalGraphics
             bufferStorage.FormatBits = VertexFormatBits.Position;
 
             var edgeVertexBufferSizeInFloats = VertexPosition.GetSizeInFloats() * bufferStorage.VertexBufferCount;
-            var numVerticesInEdgesBefore = new List<int>();
-            numVerticesInEdgesBefore.Add(0);
+            var numVerticesInEdgesBefore = new List<int>
+            {
+                0
+            };
 
             bufferStorage.VertexBuffer = new VertexBuffer(edgeVertexBufferSizeInFloats);
             bufferStorage.VertexBuffer.Map(edgeVertexBufferSizeInFloats);

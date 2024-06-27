@@ -13,8 +13,8 @@ namespace WT.ExternalGraphics
 
         public DrawingServerHost()
         {
-           documentList = new HashSet<Document>();
-           serverList = new List<DrawingServer>();
+            documentList = [];
+            serverList = [];
         }
 
         public void RegisterServer(DrawingServer drawingServer)
@@ -30,14 +30,14 @@ namespace WT.ExternalGraphics
             {
                 var serverIds = msDirectContext3DService.GetActiveServerIds();
                 directContext3DService.AddServer(drawingServer);
-               serverList.Add(drawingServer);
+                serverList.Add(drawingServer);
 
                 serverIds.Add(drawingServer.GetServerId());
 
                 msDirectContext3DService.SetActiveServers(serverIds);
             }
 
-           documentList.Add(drawingServer.Document);
+            documentList.Add(drawingServer.Document);
         }
 
         public void UnRegisterServer(Document document)
@@ -48,15 +48,14 @@ namespace WT.ExternalGraphics
             }
 
             var externalDrawerServiceId = ExternalServices.BuiltInExternalServices.DirectContext3DService;
-            if (!(ExternalServiceRegistry.GetService(externalDrawerServiceId) is MultiServerService
-                externalDrawerService))
+            if (ExternalServiceRegistry.GetService(externalDrawerServiceId) is not MultiServerService externalDrawerService)
             {
                 return;
             }
 
             foreach (var registeredServerId in externalDrawerService.GetRegisteredServerIds())
             {
-                if (!(externalDrawerService.GetServer(registeredServerId) is DrawingServer externalDrawServer))
+                if (externalDrawerService.GetServer(registeredServerId) is not DrawingServer externalDrawServer)
                 {
                     continue;
                 }
@@ -78,16 +77,14 @@ namespace WT.ExternalGraphics
             try
             {
                 var externalDrawerServiceId = ExternalServices.BuiltInExternalServices.DirectContext3DService;
-                if (!(ExternalServiceRegistry.GetService(externalDrawerServiceId) is MultiServerService
-                    externalDrawerService))
+                if (ExternalServiceRegistry.GetService(externalDrawerServiceId) is not MultiServerService externalDrawerService)
                 {
                     return false;
                 }
 
                 foreach (var registeredServerId in externalDrawerService.GetRegisteredServerIds())
                 {
-                    if (!(externalDrawerService.GetServer(registeredServerId) is DrawingServer
-                        externalDrawServer))
+                    if (externalDrawerService.GetServer(registeredServerId) is not DrawingServer externalDrawServer)
                     {
                         continue;
                     }
@@ -98,10 +95,7 @@ namespace WT.ExternalGraphics
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                //
-            }
+            catch { }
 
             return false;
         }

@@ -29,41 +29,78 @@ namespace Autodesk.Revit.DB
                 switch (scheduleFilterType)
                 {
                     case ScheduleFilterType.Equal:
+#if R24_OR_GREATER
+                        elements = Enumerable.ToList(elements.Where(x => x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.Value).AsString().Equals(value)));
+#else
                         elements = Enumerable.ToList(elements.Where(x => x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.IntegerValue).AsString().Equals(value)));
+#endif
                         break;
                     case ScheduleFilterType.NotEqual:
+#if R24_OR_GREATER
+                        elements = Enumerable.ToList(elements.Where(x => !x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.Value).AsString().Equals(value)));
+#else
                         elements = Enumerable.ToList(elements.Where(x => !x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.IntegerValue).AsString().Equals(value)));
+#endif
                         break;
                     case ScheduleFilterType.Contains:
+#if R24_OR_GREATER
+                        elements = Enumerable.ToList(elements.Where(x => x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.Value).AsString().Contains(value)));
+#else
                         elements = Enumerable.ToList(elements.Where(x => x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.IntegerValue).AsString().Contains(value)));
+#endif
                         break;
                     case ScheduleFilterType.NotContains:
+#if R24_OR_GREATER
+                        elements = Enumerable.ToList(elements.Where(x => !x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.Value).AsString().Contains(value)));
+#else
                         elements = Enumerable.ToList(elements.Where(x => !x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.IntegerValue).AsString().Contains(value)));
+#endif
                         break;
                     case ScheduleFilterType.BeginsWith:
+#if R24_OR_GREATER
+                        elements = Enumerable.ToList(elements.Where(x => x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.Value).AsString().StartsWith(value)));
+#else
                         elements = Enumerable.ToList(elements.Where(x => x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.IntegerValue).AsString().StartsWith(value)));
+#endif
                         break;
                     case ScheduleFilterType.NotBeginsWith:
+#if R24_OR_GREATER
+                        elements = Enumerable.ToList(elements.Where(x => !x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.Value).AsString().StartsWith(value)));
+#else
                         elements = Enumerable.ToList(elements.Where(x => !x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.IntegerValue).AsString().StartsWith(value)));
+#endif
                         break;
                     case ScheduleFilterType.EndsWith:
+#if R24_OR_GREATER
+                        elements = Enumerable.ToList(elements.Where(x => x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.Value).AsString().EndsWith(value)));
+#else
                         elements = Enumerable.ToList(elements.Where(x => x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.IntegerValue).AsString().EndsWith(value)));
+#endif
                         break;
                     case ScheduleFilterType.NotEndsWith:
+#if R24_OR_GREATER
+                        elements = Enumerable.ToList(elements.Where(x => !x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.Value).AsString().EndsWith(value)));
+#else
                         elements = Enumerable.ToList(elements.Where(x => !x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.IntegerValue).AsString().EndsWith(value)));
+#endif
                         break;
-#if !Revit2018&&!Revit2019&&!Revit2018C&&!Revit2019C
                     case ScheduleFilterType.HasValue:
+#if R24_OR_GREATER
+                        elements = Enumerable.ToList(elements.Where(x => !string.IsNullOrEmpty(x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.Value).AsString())));
+#else
                         elements = Enumerable.ToList(elements.Where(x => !string.IsNullOrEmpty(x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.IntegerValue).AsString())));
+#endif
                         break;
                     case ScheduleFilterType.HasNoValue:
+#if R24_OR_GREATER
+                        elements = Enumerable.ToList(elements.Where(x => string.IsNullOrEmpty(x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.Value).AsString())));
+#else
                         elements = Enumerable.ToList(elements.Where(x => string.IsNullOrEmpty(x.get_Parameter((BuiltInParameter)scheduleField.ParameterId.IntegerValue).AsString())));
+#endif
                         break;
                     default:
                         MessageBox.Show("Can't get elements" + "\n" + scheduleField.GetName());
                         break;
-
-#endif
                 }
             }
             return elements;
