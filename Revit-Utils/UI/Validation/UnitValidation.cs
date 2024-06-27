@@ -6,21 +6,39 @@ namespace WT.Revit.UI.Validation
 {
     public class UnitValidation : ValidationRule
     {
+        public Validation ValidationType { get; set; }
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
 #if R20
-            if (UnitFormatUtils.TryParse(RevitApp.Doc.GetUnits(), UnitType.UT_Length, value as string, out _))
+            UnitType unitType = ValidationType switch
+            {
+                Validation.Angle => UnitType.UT_Angle,
+                _ => UnitType.UT_Length,
+            };
+
+            if (UnitFormatUtils.TryParse(RevitApp.Doc.GetUnits(), unitType, value as string, out _))
             {
                 return new ValidationResult(true, null);
             }
 #else
-            if (UnitFormatUtils.TryParse(RevitApp.Doc.GetUnits(), SpecTypeId.Length, value as string, out _))
+            ForgeTypeId unitType = ValidationType switch
+            {
+                Validation.Angle => SpecTypeId.Angle,
+                _ => SpecTypeId.Length,
+            };
+
+            if (UnitFormatUtils.TryParse(RevitApp.Doc.GetUnits(), unitType, value as string, out _))
             {
                 return new ValidationResult(true, null);
             }
-#endif
 
+#endif
             return new ValidationResult(false, "Invalid unit format");
+        }
+        public enum Validation
+        {
+            Angle,
+            Length
         }
     }
 }
