@@ -6,13 +6,13 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "WT.System/1.0.0": {
+      "WT.Sys/1.0.0": {
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Data.DataSetExtensions": "4.5.0"
         },
         "runtime": {
-          "WT.System.dll": {}
+          "WT.Sys.dll": {}
         }
       },
       "Microsoft.CSharp/4.7.0": {},
@@ -20,7 +20,7 @@
     }
   },
   "libraries": {
-    "WT.System/1.0.0": {
+    "WT.Sys/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -1,6 +1,4 @@
-﻿using Autodesk.Revit.DB;
-
-namespace WT.Revit.Extensions
+﻿namespace Autodesk.Revit.DB
 {
     public static class  OutlineExtensions
     {
@@ -17,6 +15,11 @@ namespace WT.Revit.Extensions
         public static double Height(this Outline outline)
         {
             return outline.MaximumPoint.X - outline.MinimumPoint.X;
+        }
+
+        public static XYZ Center(this Outline outline)
+        {
+            return new XYZ((outline.MinimumPoint.X + outline.MaximumPoint.X) / 2, (outline.MinimumPoint.Y + outline.MaximumPoint.Y) / 2, (outline.MinimumPoint.Z + outline.MaximumPoint.Z) / 2);
         }
     }
 }

@@ -1,14 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net48;net8.0-windows</TargetFrameworks>
-		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
 		<OutputType>Library</OutputType>
 		<RootNamespace>$(MSBuildProjectName)</RootNamespace>
-		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
-		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AssemblyName>WT.Sys</AssemblyName>
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
 		<Copyright>Copyright ©  2024</Copyright>
-		<AssemblyVersion>24.5.28.0</AssemblyVersion>
-		<FileVersion>1.0.0.0</FileVersion>
+		<AssemblyVersion>24.9.18.0</AssemblyVersion>
 		<LangVersion>12.0</LangVersion>
 	</PropertyGroup>
 	<ItemGroup>

@@ -1,11 +1,14 @@
 ﻿using Autodesk.Revit.DB;
+using System.Drawing;
+using Color = Autodesk.Revit.DB.Color;
 using CreationDoc = Autodesk.Revit.Creation.Document;
+
 
 namespace WT.Revit.Extensions
 {
     public static class CreationDocumentExtensions
     {
-        public static DetailCurve NewDetailLine(this CreationDoc creationDoc, XYZ startPoint, XYZ endPoint, View view = null, System.Drawing.Color? color = null)
+        public static DetailCurve NewDetailLine(this CreationDoc creationDoc, XYZ startPoint, XYZ endPoint, View view = null,global::System.Drawing.Color? color = null)
         {
             view ??= RevitApp.ActiveView;
 

@@ -10,7 +10,7 @@
 		<LangVersion>12.0</LangVersion>
 		<PlatformTarget>x64</PlatformTarget>
 		<AssemblyName>WT.$(MSBuildProjectName)</AssemblyName>
-		<AssemblyVersion>24.6.28.0</AssemblyVersion>
+		<AssemblyVersion>24.9.18.0</AssemblyVersion>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
@@ -70,7 +70,7 @@
 		<PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\System\WT.System.csproj" />
+	  <ProjectReference Include="..\System\WT.System.csproj" PrivateAssets="all" />
 	</ItemGroup>
 
 </Project>

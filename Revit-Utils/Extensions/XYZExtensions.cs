@@ -11,14 +11,14 @@ namespace Autodesk.Revit.DB
             return Project(p1, Plane.CreateByNormalAndOrigin(vector, point));
         }
 
-        public static XYZ Project(this XYZ point, Line line)
+        public static XYZ Project(this XYZ point, Curve curve)
         {
-            return line.Project(point).XYZPoint;
+            return curve.Project(point).XYZPoint;
         }
 
-        public static double ProjectDistance(this XYZ point, Line line)
+        public static double ProjectDistance(this XYZ point, Curve curve)
         {
-            return line.Project(point).Distance;
+            return curve.Project(point).Distance;
         }
 
         public static XYZ Project(this XYZ point, Plane plane)
@@ -61,16 +61,80 @@ namespace Autodesk.Revit.DB
         /// <param name="point2">The second point.</param>
         /// <param name="tolerance">The tolerance for equality check.</param>
         /// <returns>True if the point is between the two other points within the tolerance, otherwise false.</returns>
-        public static bool IsBetween(this XYZ point, XYZ point1, XYZ point2, double tolerance = 1e-9)
+        public static bool IsBetween(this XYZ point, XYZ point1, XYZ point2, bool isContainingEndpoints = true, double tolerance = 1e-9)
         {
+            if (isContainingEndpoints)
+            {
+                if (point.IsAlmostEqualTo(point1, tolerance) || point.IsAlmostEqualTo(point2, tolerance))
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if (point.IsAlmostEqualTo(point1, tolerance) || point.IsAlmostEqualTo(point2, tolerance))
+                {
+                    return false;
+                }
+            }
+
             return Math.Abs(point.DistanceTo(point1) + point.DistanceTo(point2) - point1.DistanceTo(point2)) < tolerance;
         }
 
-        public class XYZComparer : IEqualityComparer<XYZ>
+        public static bool IsOn(this XYZ point, Curve curve)
         {
+            if (point.ProjectDistance(curve) < 1e-9)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool IsOn(this XYZ point, Plane plane)
+        {
+            return plane.IsOnPlane(point);
+        }
+
+        public static List<XYZ> Purge(this List<XYZ> points, double tolerance = 1e-9)
+        {
+            return points.Distinct(new XYZComparer()).ToList();
+        }
+
+        // Summary:
+        //     Returns the angle between this vector and the specified vector.
+        //
+        // Parameters:
+        //   source:
+        //     The specified vector.
+        //
+        // Returns:
+        //     The real number between 0 and 2PI equal to the angle between the two vectors in
+        //     radians..
+        //
+        // Exceptions:
+        //   T:Autodesk.Revit.Exceptions.ArgumentNullException:
+        //     Thrown when source is null.
+        //
+        // Remarks:
+        //     The angle between the two vectors is measured in the plane spanned by them.
+        public static double FullAngleTo(this XYZ vector, XYZ source)
+        {
+            double angle = vector.AngleTo(source);
+            XYZ crossProduct = vector.CrossProduct(source);
+            if (crossProduct.Z < 0)
+            {
+                angle = 2 * Math.PI - angle;
+            }
+            return angle;
+        }
+
+        public class XYZComparer(double tolerance = 1e-9) : IEqualityComparer<XYZ>
+        {
+            private readonly double _tolerance = tolerance;
+
             public bool Equals(XYZ x, XYZ y)
             {
-                return x.IsAlmostEqualTo(y);
+                return x.IsAlmostEqualTo(y, _tolerance);
             }
 
             public int GetHashCode(XYZ obj)

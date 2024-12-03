@@ -9,6 +9,7 @@ namespace Autodesk.Revit.DB
             Category category = doc.Settings.Categories.get_Item(builtInCategory);
             view.SetCategoryHidden(category.Id, hide);
         }
+
         public static void SetCategoryOverrides(this View view, BuiltInCategory categoryId, bool projectionFill, bool cutFill, Document doc)
         {
             OverrideGraphicSettings oGS = view.GetCategoryOverrides(doc.Settings.Categories.get_Item(categoryId).Id);
@@ -18,6 +19,7 @@ namespace Autodesk.Revit.DB
 #endif
             view.SetCategoryOverrides(doc.Settings.Categories.get_Item(categoryId).Id, oGS);
         }
+
 #if !Revit2018
         public static void SetCategoryOverrides(this View view, BuiltInCategory categoryId, bool projectionFill, bool cutFill, Color color, Document doc)
         {
@@ -46,6 +48,7 @@ namespace Autodesk.Revit.DB
             view.SetCategoryOverrides(doc.Settings.Categories.get_Item(categoryId).Id, oGS);
         }
 #endif
+
         //
         // Summary:
         //     Sets graphic overrides for a category in view.
@@ -94,6 +97,7 @@ namespace Autodesk.Revit.DB
                 }
             }
         }
+
         public static SketchPlane SetAsWorkPlane(this View view)
         {
             Document doc = view.Document;
@@ -101,6 +105,11 @@ namespace Autodesk.Revit.DB
             SketchPlane sp = SketchPlane.Create(doc, plane);
             view.SketchPlane = sp;
             return sp;
+        }
+
+        public static Plane GetPlane(this View view)
+        {
+            return Plane.CreateByNormalAndOrigin(view.ViewDirection, view.Origin);
         }
     }
 }

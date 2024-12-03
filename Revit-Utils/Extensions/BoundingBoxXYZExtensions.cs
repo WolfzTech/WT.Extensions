@@ -1,7 +1,6 @@
-﻿using Autodesk.Revit.DB;
-using System;
+﻿using System;
 
-namespace WT.Revit.Extensions
+namespace Autodesk.Revit.DB
 {
     public static class BoundingBoxXYZExtensions
     {
@@ -41,6 +40,11 @@ namespace WT.Revit.Extensions
                 Min = new XYZ(Math.Max(left.Min.X, right.Min.X), Math.Max(left.Min.Y, right.Min.Y), Math.Max(left.Min.Z, right.Min.Z)),
                 Max = new XYZ(Math.Min(left.Max.X, right.Max.X), Math.Min(left.Max.Y, right.Max.Y), Math.Min(left.Max.Z, right.Max.Z))
             };
+        }
+
+        public static XYZ Center(this BoundingBoxXYZ boundingBox)
+        {
+            return new XYZ((boundingBox.Min.X + boundingBox.Max.X) / 2, (boundingBox.Min.Y + boundingBox.Max.Y) / 2, (boundingBox.Min.Z + boundingBox.Max.Z) / 2);
         }
     }
 }

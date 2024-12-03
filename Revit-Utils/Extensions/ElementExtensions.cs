@@ -68,14 +68,12 @@ namespace Autodesk.Revit.DB
         public static XYZ LocationPoint(this Element element)
         {
             var location = element.Location;
-            if (location is LocationCurve)
+            if (location is LocationCurve locationCurve)
             {
-                LocationCurve locationCurve = element.Location as LocationCurve;
                 return locationCurve.Curve.GetEndPoint(0);
             }
-            else if (location is LocationPoint)
+            else if (location is LocationPoint locationPoint)
             {
-                LocationPoint locationPoint = element.Location as LocationPoint;
                 return locationPoint.Point;
             }
             else return new XYZ();

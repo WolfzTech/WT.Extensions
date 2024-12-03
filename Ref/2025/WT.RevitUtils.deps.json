@@ -10,11 +10,12 @@
         "dependencies": {
           "JetBrains.Annotations": "2023.3.0",
           "Microsoft.CSharp": "4.7.0",
-          "Nice3point.Revit.Api.AdWindows": "2025.0.2",
-          "Nice3point.Revit.Api.RevitAPI": "2025.0.2",
-          "Nice3point.Revit.Api.RevitAPIUI": "2025.0.2",
+          "Nice3point.Revit.Api.AdWindows": "2025.3.0",
+          "Nice3point.Revit.Api.RevitAPI": "2025.3.0",
+          "Nice3point.Revit.Api.RevitAPIUI": "2025.3.0",
           "System.Data.DataSetExtensions": "4.5.0",
-          "WT.System": "1.0.0"
+          "WT.Sys": "1.0.0",
+          "WT.Sys.Reference": "24.9.18.0"
         },
         "runtime": {
           "WT.RevitUtils.dll": {}
@@ -29,17 +30,28 @@
         }
       },
       "Microsoft.CSharp/4.7.0": {},
-      "Nice3point.Revit.Api.AdWindows/2025.0.2": {},
-      "Nice3point.Revit.Api.RevitAPI/2025.0.2": {},
-      "Nice3point.Revit.Api.RevitAPIUI/2025.0.2": {},
+      "Nice3point.Revit.Api.AdWindows/2025.3.0": {},
+      "Nice3point.Revit.Api.RevitAPI/2025.3.0": {},
+      "Nice3point.Revit.Api.RevitAPIUI/2025.3.0": {},
       "System.Data.DataSetExtensions/4.5.0": {},
-      "WT.System/1.0.0": {
+      "WT.Sys/1.0.0": {
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
           "System.Data.DataSetExtensions": "4.5.0"
         },
         "runtime": {
-          "WT.System.dll": {}
+          "WT.Sys.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": ""
+          }
+        }
+      },
+      "WT.Sys.Reference/24.9.18.0": {
+        "runtime": {
+          "WT.Sys.dll": {
+            "assemblyVersion": "24.9.18.0",
+            "fileVersion": "24.9.18.0"
+          }
         }
       }
     }
@@ -64,26 +76,26 @@
       "path": "microsoft.csharp/4.7.0",
       "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
     },
-    "Nice3point.Revit.Api.AdWindows/2025.0.2": {
+    "Nice3point.Revit.Api.AdWindows/2025.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-owCTsSbof80u8DXOUfJ6HjnEkZ4e16T8NVcTcLGoCy+JeUcXI6Ibrh+lM9sPVwqIPz9CBLb+/53NuCZR0RNmPg==",
-      "path": "nice3point.revit.api.adwindows/2025.0.2",
-      "hashPath": "nice3point.revit.api.adwindows.2025.0.2.nupkg.sha512"
+      "sha512": "sha512-4T6k4jv3gqhc1uiFGsBy+/WvEjwU2Nni2UywUZzQp62gHzof8xaTBu1jNVoZUW6OwfKj3u5emToj93ktYoB0bA==",
+      "path": "nice3point.revit.api.adwindows/2025.3.0",
+      "hashPath": "nice3point.revit.api.adwindows.2025.3.0.nupkg.sha512"
     },
-    "Nice3point.Revit.Api.RevitAPI/2025.0.2": {
+    "Nice3point.Revit.Api.RevitAPI/2025.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-cfkgSjcWg0cqTgLO4zCsJRgZgoB6uB8vkcBsAGv2W6TrIkSlJ5D/Ys/xTj9my0PEwNF9vmDtxv1n2zSBq8Ni8Q==",
-      "path": "nice3point.revit.api.revitapi/2025.0.2",
-      "hashPath": "nice3point.revit.api.revitapi.2025.0.2.nupkg.sha512"
+      "sha512": "sha512-5Rkg7Hcw7fd3sI9Yz8hJRqHcMDI+hVrtHlVL7W5fDVHqDmANzAiJYWa02qj4zf6Cq4XHGqaA3DR1+VtS2G8UsQ==",
+      "path": "nice3point.revit.api.revitapi/2025.3.0",
+      "hashPath": "nice3point.revit.api.revitapi.2025.3.0.nupkg.sha512"
     },
-    "Nice3point.Revit.Api.RevitAPIUI/2025.0.2": {
+    "Nice3point.Revit.Api.RevitAPIUI/2025.3.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-9C+HcZrsS00qf3cisRfIyl58KNrwIYOsJPTIy367mg00Y/XnSa5rvDwXQSIRZ32ZcYyE3ApB6472pyWoXdjMPQ==",
-      "path": "nice3point.revit.api.revitapiui/2025.0.2",
-      "hashPath": "nice3point.revit.api.revitapiui.2025.0.2.nupkg.sha512"
+      "sha512": "sha512-aoy2WpGdcUUssNuEkp873VxNLm6MaAXAfCvIevEgsTLPpqO+z87Oux0EMI2PeE6aVkHFn+4AwQYugscwxjUC6w==",
+      "path": "nice3point.revit.api.revitapiui/2025.3.0",
+      "hashPath": "nice3point.revit.api.revitapiui.2025.3.0.nupkg.sha512"
     },
     "System.Data.DataSetExtensions/4.5.0": {
       "type": "package",
@@ -92,8 +104,13 @@
       "path": "system.data.datasetextensions/4.5.0",
       "hashPath": "system.data.datasetextensions.4.5.0.nupkg.sha512"
     },
-    "WT.System/1.0.0": {
+    "WT.Sys/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "WT.Sys.Reference/24.9.18.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }
