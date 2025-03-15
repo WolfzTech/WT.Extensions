@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+using WT.Revit.Extensions;
 
 namespace Autodesk.Revit.DB
 {
@@ -34,6 +36,12 @@ namespace Autodesk.Revit.DB
         public static double ProjectDistance(this XYZ point, Plane plane)
         {
             plane.Project(point, out _, out var distance);
+            return distance;
+        }
+
+        public static double ProjectDistance(this XYZ point, Face face)
+        {
+            face.GetSurface().Project(point, out _, out var distance);
             return distance;
         }
 
@@ -83,6 +91,21 @@ namespace Autodesk.Revit.DB
 
         public static bool IsOn(this XYZ point, Curve curve)
         {
+            if(curve is Arc arc)
+            {
+              if(point.IsAlmostEqualTo(arc.Center))
+                {
+                    return false;
+                }
+            }
+            else if (curve is Ellipse ellipse)
+            {
+                if (point.IsAlmostEqualTo(ellipse.Foci().Focus1)||point.IsAlmostEqualTo(ellipse.Foci().Focus2))
+                {
+                    return false;
+                }
+            }
+
             if (point.ProjectDistance(curve) < 1e-9)
             {
                 return true;
@@ -95,9 +118,43 @@ namespace Autodesk.Revit.DB
             return plane.IsOnPlane(point);
         }
 
+        public static bool IsInside(this XYZ point, CurveLoop curveLoop)
+        {
+            if (!curveLoop.HasPlane())
+            {
+                return false;
+            }
+
+            if (curveLoop.IsOpen())
+            {
+                return false;
+            }
+
+            var plane = curveLoop.GetPlane();
+            if (!plane.IsOnPlane(point))
+            {
+                return false;
+            }
+
+            if (curveLoop.Any(point.IsOn))
+            {
+                return true;
+            }
+
+#if R20 || R21
+            var randomRay = Line.CreateBound(point, plane.Origin + plane.XVec * double.MaxValue);//Careful with this
+#else
+            var randomRay = Line.CreateBound(point, plane.Origin + plane.XVec * plane.GetBoundingBoxUV().Max.U);
+#endif
+
+            var numIntersect = curveLoop.Count(curve => curve.Intersect(randomRay) == SetComparisonResult.Overlap);
+
+            return numIntersect % 2 != 0;
+        }
+
         public static List<XYZ> Purge(this List<XYZ> points, double tolerance = 1e-9)
         {
-            return points.Distinct(new XYZComparer()).ToList();
+            return points.Distinct(new XYZComparer(tolerance)).ToList();
         }
 
         // Summary:

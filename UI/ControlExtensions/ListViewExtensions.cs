@@ -56,14 +56,18 @@ namespace WT.UI.ControlExtensions
 
         private static void UpdateSelectedItems(ListView listView, IList selectedItems)
         {
+            listView.SelectionChanged -= ListView_SelectionChanged;
+
             listView.SelectedItems.Clear();
             if (selectedItems != null)
             {
-                foreach (var item in selectedItems)
-                {
-                    listView.SelectedItems.Add(item);
-                }
+                    foreach (var item in selectedItems)
+                    {
+                        listView.SelectedItems.Add(item);
+                    }
             }
+
+            listView.SelectionChanged += ListView_SelectionChanged;
         }
     }
 

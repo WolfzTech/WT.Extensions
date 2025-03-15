@@ -56,6 +56,8 @@ namespace WT.UI.ControlExtensions
 
         private static void UpdateSelectedItems(DataGrid dataGrid, IList selectedItems)
         {
+            dataGrid.SelectionChanged -= DataGrid_SelectionChanged;
+
             dataGrid.SelectedItems.Clear();
             if (selectedItems != null)
             {
@@ -64,6 +66,8 @@ namespace WT.UI.ControlExtensions
                     dataGrid.SelectedItems.Add(item);
                 }
             }
+
+            dataGrid.SelectionChanged += DataGrid_SelectionChanged;
         }
     }
 

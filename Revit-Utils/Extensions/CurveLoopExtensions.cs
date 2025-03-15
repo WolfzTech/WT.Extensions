@@ -4,7 +4,7 @@ namespace Autodesk.Revit.DB
 {
     public static class CurveLoopExtensions
     {
-        public static CurveLoop Purge(this CurveLoop curveLoop)
+        public static CurveLoop Purge(this CurveLoop curveLoop)//still need to check for arcs, elipses, etc.
         {
             var result = new CurveLoop();
 
@@ -50,6 +50,11 @@ namespace Autodesk.Revit.DB
             {
                 return Purge(result);
             }
+        }
+
+        public static bool IsInside(this CurveLoop curveLoop, CurveLoop targetCurveLoop)
+        {
+            return curveLoop.All(curve => curve.IsInside(targetCurveLoop));
         }
     }
 }

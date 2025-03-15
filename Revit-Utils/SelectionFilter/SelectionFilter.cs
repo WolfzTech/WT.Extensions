@@ -13,5 +13,20 @@ namespace WT.Revit.SelectionFilter
         {
             get { return new DoorSelectionFilter(); }
         }
+
+        public static ISelectionFilter DetailLine
+        {
+            get { return new DetailLineSelectionFilter(); }
+        }
+
+        public static ISelectionFilter DetailCurve
+        {
+            get { return new DetailCurveSelectionFilter(); }
+        }
+
+        public static ISelectionFilter ModelLine
+        {
+            get { return new ModelLineSelectionFilter(); }
+        }
     }
 }

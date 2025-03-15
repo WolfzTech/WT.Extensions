@@ -25,7 +25,7 @@ namespace WT.UI.DetailMessage
         {
             get => ViewModel?.Detail; set
             {
-               ViewModel.Detail = value;
+                ViewModel.Detail = value;
             }
         }
 
@@ -33,7 +33,7 @@ namespace WT.UI.DetailMessage
 
         private DetailMessageVM ViewModel { get; set; }
 
-        public DetailMessage(string title, string message, string detail)
+        public DetailMessage(string title, string message, string detail, bool isTopMost = false)
         {
             ViewModel = new DetailMessageVM();
             Dialog = new DetailMessageUI() { DataContext = ViewModel };
@@ -41,6 +41,7 @@ namespace WT.UI.DetailMessage
             Title = title;
             Message = message;
             Detail = detail;
+            Dialog.Topmost = isTopMost;
         }
 
         public DetailMessage()
@@ -59,9 +60,9 @@ namespace WT.UI.DetailMessage
             return Dialog.ShowDialog();
         }
 
-        public static bool? ShowDialog(string title, string message, string detail)
+        public static bool? ShowDialog(string title, string message, string detail, bool isTopMost = false)
         {
-            return new DetailMessage(title, message, detail).ShowDialog();
+            return new DetailMessage(title, message, detail,isTopMost).ShowDialog();
         }
 
         public static void Show(string title, string message, string detail)

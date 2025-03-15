@@ -81,6 +81,8 @@ namespace WT.ExternalGraphics
             {
                 DrawingServer.BasePoint = null;
                 DrawingServer.NextPoint = null;
+                this.DrawingServer.LineList.Clear();
+                HostApplication.ActiveUIDocument.RefreshActiveView();
 
                 var externalGraphics = new DrawingServerHost();
                 externalGraphics.UnRegisterServer(DrawingServer.Document);

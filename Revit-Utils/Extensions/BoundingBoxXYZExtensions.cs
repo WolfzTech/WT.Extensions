@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Autodesk.Revit.DB
 {
@@ -45,6 +47,22 @@ namespace Autodesk.Revit.DB
         public static XYZ Center(this BoundingBoxXYZ boundingBox)
         {
             return new XYZ((boundingBox.Min.X + boundingBox.Max.X) / 2, (boundingBox.Min.Y + boundingBox.Max.Y) / 2, (boundingBox.Min.Z + boundingBox.Max.Z) / 2);
+        }
+
+        public static BoundingBoxXYZ Create(IList<XYZ> points)
+        {
+            var minX = points.Min(p => p.X);
+            var minY = points.Min(p => p.Y);
+            var minZ = points.Min(p => p.Z);
+            var maxX = points.Max(p => p.X);
+            var maxY = points.Max(p => p.Y);
+            var maxZ = points.Max(p => p.Z);
+
+            return new BoundingBoxXYZ
+            {
+                Min = new XYZ(minX, minY, minZ),
+                Max = new XYZ(maxX, maxY, maxZ)
+            };
         }
     }
 }

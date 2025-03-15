@@ -9,7 +9,7 @@
         Title="{Binding Title}"
         SizeToContent="Height"
         Width="600"
-        WindowStartupLocation="CenterScreen" 
+        WindowStartupLocation="CenterOwner"
         WindowStyle="ToolWindow">
     <DockPanel Margin="10">
         <TextBlock Text="{Binding Message}"
