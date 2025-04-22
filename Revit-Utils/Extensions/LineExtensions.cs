@@ -88,12 +88,21 @@ namespace Autodesk.Revit.DB
             var unboundLine = line.CreateUnbound();
             var unboundDestinationLine = destinationLine.CreateUnbound();
 
-            var intersection = unboundLine.Intersect(unboundDestinationLine, out IntersectionResultArray resultArray);
-            if (intersection == SetComparisonResult.Overlap)
+#if R26_OR_GREATER
+            var intersection = unboundLine.Intersect(unboundDestinationLine, CurveIntersectResultOption.Detailed );
+            if (intersection.Result == SetComparisonResult.Overlap)
+            {
+                foreach (CurveOverlapPoint result in intersection.GetOverlaps() )
+                {
+                    var resultPoint = result.Point;
+#else
+  var intersection = unboundLine.Intersect(unboundDestinationLine, out IntersectionResultArray resultArray);
+     if (intersection == SetComparisonResult.Overlap)
             {
                 foreach (IntersectionResult result in resultArray)
                 {
-                    var resultPoint = result.XYZPoint;
+                   var resultPoint = result.XYZPoint;
+#endif
                     if (resultPoint.IsAlmostEqualTo(line.GetEndPoint(0)) || resultPoint.IsAlmostEqualTo(line.GetEndPoint(1)))
                         return line;
                     if (resultPoint.IsBetween(line.GetEndPoint(0), line.GetEndPoint(1)))

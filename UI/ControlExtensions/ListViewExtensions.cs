@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Windows.Controls;
 using System.Windows;
+using System.Collections.Specialized;
 
 namespace WT.UI.ControlExtensions
 {
@@ -27,6 +28,16 @@ namespace WT.UI.ControlExtensions
             if (d is ListView listView)
             {
                 listView.SelectionChanged -= ListView_SelectionChanged;
+
+                if (e.NewValue is INotifyCollectionChanged newCollection)
+                {
+                    // 🔹 Listen for changes in the collection
+                    newCollection.CollectionChanged += (s, args) =>
+                    {
+                        UpdateSelectedItems(listView, (IList)e.NewValue);
+                    };
+                }
+
                 if (e.NewValue is IList newList)
                 {
                     listView.SelectionChanged += ListView_SelectionChanged;
@@ -40,16 +51,26 @@ namespace WT.UI.ControlExtensions
             if (sender is ListView listView)
             {
                 IList selectedItems = GetSelectedItems(listView);
-                if (selectedItems != null && e.OriginalSource == listView)
+                if (selectedItems != null)
                 {
                     foreach (var item in e.RemovedItems)
                     {
-                        selectedItems.Remove(item);
+                        if (selectedItems.Contains(item))
+                        {
+                            selectedItems.Remove(item);
+                        }
                     }
+
                     foreach (var item in e.AddedItems)
                     {
-                        selectedItems.Add(item);
+                        if (!selectedItems.Contains(item))
+                        {
+                            selectedItems.Add(item);
+                        }
                     }
+
+                    // 🔹 Force ListView to refresh selections
+                    UpdateSelectedItems(listView, selectedItems);
                 }
             }
         }
@@ -58,13 +79,11 @@ namespace WT.UI.ControlExtensions
         {
             listView.SelectionChanged -= ListView_SelectionChanged;
 
+            // 🔹 Clear selection and reapply the selected items
             listView.SelectedItems.Clear();
-            if (selectedItems != null)
+            foreach (var item in selectedItems)
             {
-                    foreach (var item in selectedItems)
-                    {
-                        listView.SelectedItems.Add(item);
-                    }
+                listView.SelectedItems.Add(item);
             }
 
             listView.SelectionChanged += ListView_SelectionChanged;

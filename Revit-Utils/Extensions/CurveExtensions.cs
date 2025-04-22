@@ -6,7 +6,11 @@
         {
             foreach (var targetCurve in targetCurveLoop)
             {
-                if (curve.Intersect(targetCurve) == SetComparisonResult.Overlap)
+#if R26_OR_GREATER
+                if (curve.Intersect(targetCurve, CurveIntersectResultOption.Detailed).Result == SetComparisonResult.Overlap)
+#else
+if (curve.Intersect(targetCurve) == SetComparisonResult.Overlap)
+#endif
                 {
                     return false;
                 }

@@ -91,16 +91,16 @@ namespace Autodesk.Revit.DB
 
         public static bool IsOn(this XYZ point, Curve curve)
         {
-            if(curve is Arc arc)
+            if (curve is Arc arc)
             {
-              if(point.IsAlmostEqualTo(arc.Center))
+                if (point.IsAlmostEqualTo(arc.Center))
                 {
                     return false;
                 }
             }
             else if (curve is Ellipse ellipse)
             {
-                if (point.IsAlmostEqualTo(ellipse.Foci().Focus1)||point.IsAlmostEqualTo(ellipse.Foci().Focus2))
+                if (point.IsAlmostEqualTo(ellipse.Foci().Focus1) || point.IsAlmostEqualTo(ellipse.Foci().Focus2))
                 {
                     return false;
                 }
@@ -147,7 +147,11 @@ namespace Autodesk.Revit.DB
             var randomRay = Line.CreateBound(point, plane.Origin + plane.XVec * plane.GetBoundingBoxUV().Max.U);
 #endif
 
-            var numIntersect = curveLoop.Count(curve => curve.Intersect(randomRay) == SetComparisonResult.Overlap);
+#if R26_OR_GREATER
+            var numIntersect = curveLoop.Count(curve => curve.Intersect(randomRay, CurveIntersectResultOption.Detailed).Result == SetComparisonResult.Overlap);
+#else
+               var numIntersect = curveLoop.Count(curve => curve.Intersect(randomRay) == SetComparisonResult.Overlap);
+#endif
 
             return numIntersect % 2 != 0;
         }

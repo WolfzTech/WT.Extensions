@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Windows.Controls;
 using System.Windows;
+using System.Collections.Specialized;
 
 namespace WT.UI.ControlExtensions
 {
@@ -24,50 +25,68 @@ namespace WT.UI.ControlExtensions
 
         private static void OnSelectedItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is DataGrid dataGrid)
+            if (d is DataGrid datagrid)
             {
-                dataGrid.SelectionChanged -= DataGrid_SelectionChanged;
+                datagrid.SelectionChanged -= ListView_SelectionChanged;
+
+                if (e.NewValue is INotifyCollectionChanged newCollection)
+                {
+                    // 🔹 Listen for changes in the collection
+                    newCollection.CollectionChanged += (s, args) =>
+                    {
+                        UpdateSelectedItems(datagrid, (IList)e.NewValue);
+                    };
+                }
+
                 if (e.NewValue is IList newList)
                 {
-                    dataGrid.SelectionChanged += DataGrid_SelectionChanged;
-                    UpdateSelectedItems(dataGrid, newList);
+                    datagrid.SelectionChanged += ListView_SelectionChanged;
+                    UpdateSelectedItems(datagrid, newList);
                 }
             }
         }
 
-        private static void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private static void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender is DataGrid dataGrid)
             {
                 IList selectedItems = GetSelectedItems(dataGrid);
-                if (selectedItems != null && e.OriginalSource == dataGrid)
+                if (selectedItems != null)
                 {
                     foreach (var item in e.RemovedItems)
                     {
-                        selectedItems.Remove(item);
+                        if (selectedItems.Contains(item))
+                        {
+                            selectedItems.Remove(item);
+                        }
                     }
+
                     foreach (var item in e.AddedItems)
                     {
-                        selectedItems.Add(item);
+                        if (!selectedItems.Contains(item))
+                        {
+                            selectedItems.Add(item);
+                        }
                     }
+
+                    // 🔹 Force ListView to refresh selections
+                    UpdateSelectedItems(dataGrid, selectedItems);
                 }
             }
         }
 
         private static void UpdateSelectedItems(DataGrid dataGrid, IList selectedItems)
         {
-            dataGrid.SelectionChanged -= DataGrid_SelectionChanged;
+            dataGrid.SelectionChanged -= ListView_SelectionChanged;
 
+            // 🔹 Clear selection and reapply the selected items
             dataGrid.SelectedItems.Clear();
-            if (selectedItems != null)
+            foreach (var item in selectedItems)
             {
-                foreach (var item in selectedItems)
-                {
-                    dataGrid.SelectedItems.Add(item);
-                }
+                dataGrid.SelectedItems.Add(item);
             }
 
-            dataGrid.SelectionChanged += DataGrid_SelectionChanged;
+            dataGrid.SelectionChanged += ListView_SelectionChanged;
         }
     }
 

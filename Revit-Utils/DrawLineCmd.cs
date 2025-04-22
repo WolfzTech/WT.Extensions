@@ -23,7 +23,7 @@ namespace WT.Revit
             {
                 p1 = uiDocument.Selection.PickPoint("Pick Base Point:");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //
             }
@@ -42,7 +42,7 @@ namespace WT.Revit
 
                 p2 = uiDocument.Selection.PickPoint("Pick Next Point:");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //
             }

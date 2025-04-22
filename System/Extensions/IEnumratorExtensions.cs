@@ -1,4 +1,8 @@
-﻿namespace System.Collections.Generic
+﻿//remove code CS8632
+
+
+
+namespace System.Collections.Generic
 {
     public static class IEnumratorExtensions
     {
@@ -41,6 +45,7 @@
             }
         }
 
+#nullable enable
 #if NETFRAMEWORK
         /// <summary>Returns the maximum value in a generic sequence according to a specified key selector function.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
@@ -283,6 +288,7 @@
         }
 
 #endif
+#nullable disable
     }
 }
 
