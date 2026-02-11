@@ -30,7 +30,7 @@ namespace WT.Revit.Extensions
             }
             else
             {
-                var detailCurve = creationDoc.NewDetailCurve(view, Line.CreateBound(startPoint, endPoint).Project(view.SketchPlane.GetPlane()));
+                var detailCurve = creationDoc.NewDetailCurve(view, Line.CreateBound(startPoint, endPoint).Project(view.GetPlane()));
                 if (color != null)
                 {
                     var overrideGraphic = view.GetElementOverrides(detailCurve.Id);

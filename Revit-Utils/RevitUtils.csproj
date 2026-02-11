@@ -103,7 +103,9 @@
 		<PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\System\WT.System.csproj" PrivateAssets="all" />
+	  <ProjectReference Include="..\System\WT.System.csproj" PrivateAssets="all">
+	    <Private>False</Private>
+	  </ProjectReference>
 	</ItemGroup>
 
 </Project>

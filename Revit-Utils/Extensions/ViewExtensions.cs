@@ -109,6 +109,11 @@ namespace Autodesk.Revit.DB
 
         public static Plane GetPlane(this View view)
         {
+            if (view.SketchPlane != null)
+            {
+                return view.SketchPlane.GetPlane();
+            }
+
             return Plane.CreateByNormalAndOrigin(view.ViewDirection, view.Origin);
         }
     }

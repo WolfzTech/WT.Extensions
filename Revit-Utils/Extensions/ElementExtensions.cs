@@ -1,6 +1,8 @@
 ﻿using Autodesk.Revit.DB.Architecture;
 using JetBrains.Annotations;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using PureAttribute = JetBrains.Annotations.PureAttribute;
 
 namespace Autodesk.Revit.DB
@@ -65,12 +67,25 @@ namespace Autodesk.Revit.DB
             return (familyName, typeName);
         }
 
-        public static XYZ LocationPoint(this Element element)
+        public enum CurvePosition
+        {
+            StartPoint,
+            EndPoint,
+            MidPoint
+        }
+
+        public static XYZ LocationPoint(this Element element, CurvePosition curvePosition = CurvePosition.StartPoint)
         {
             var location = element.Location;
             if (location is LocationCurve locationCurve)
             {
-                return locationCurve.Curve.GetEndPoint(0);
+                return curvePosition switch
+                {
+                    CurvePosition.StartPoint => locationCurve.Curve.GetEndPoint(0),
+                    CurvePosition.EndPoint => locationCurve.Curve.GetEndPoint(1),
+                    CurvePosition.MidPoint => locationCurve.Curve.Evaluate(0.5, true),
+                    _ => locationCurve.Curve.GetEndPoint(0),
+                };
             }
             else if (location is LocationPoint locationPoint)
             {
@@ -163,6 +178,65 @@ namespace Autodesk.Revit.DB
             }
 
             return element.Document.GetElement(typeId).get_Parameter(guid) ?? parameter;
+        }
+
+        public class ElementEqualityComparer : IEqualityComparer<Element>
+        {
+            public bool Equals(Element x, Element y)
+            {
+                if (ReferenceEquals(x, y)) return true;
+                if (ReferenceEquals(x, null)) return false;
+                if (ReferenceEquals(y, null)) return false;
+                if (x.GetType() != y.GetType()) return false;
+                return Equals(x.Id, y.Id) && Equals(x.Document, y.Document);
+            }
+
+            public int GetHashCode(Element obj)
+            {
+                unchecked
+                {
+                    if (ReferenceEquals(obj, null)) return 0;
+
+                    var hashCode = (obj.Id != null ? obj.Id.GetHashCode() : 0);
+                    hashCode = (hashCode * 397) ^ (obj.Document != null ? obj.Document.GetHashCode() : 0);
+                    return hashCode;
+                }
+            }
+        }
+
+        public static Element GetParentElement(this Element element)
+        {
+            if (element.GroupId != ElementId.InvalidElementId) return element.Document.GetElement(element.GroupId);
+            if (element is FamilyInstance familyInstance && familyInstance.SuperComponent != null) return familyInstance.SuperComponent;
+            if (element is InsulationLiningBase insulation) return element.Document.GetElement(insulation.HostElementId);
+            return null;
+        }
+
+        public static IEnumerable<Element> GetMembers(this Group group)
+        {
+            if (group == null) return new List<Element>();
+
+            var members = new List<Element>();
+            foreach (var memberId in group.GetMemberIds())
+            {
+                var element = group.Document.GetElement(memberId);
+                if (element is Group subGroup) members.AddRange(subGroup.GetMembers());
+                else if (element != null) members.Add(element);
+            }
+
+            return members;
+        }
+
+        public static IEnumerable<Element> GetMembers(this AssemblyInstance instance)
+        {
+            IEnumerable<Element> members = instance.GetMemberIds().Select(instance.Document.GetElement);
+            return members;
+        }
+
+        public static IEnumerable<Element> GetMembers(this FamilyInstance instance)
+        {
+            IEnumerable<Element> members = instance.GetSubComponentIds().Select(instance.Document.GetElement);
+            return members;
         }
     }
 }
